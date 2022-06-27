@@ -17,7 +17,7 @@ This guide includes how-to guides, sample code, recommendations, and technical b
   * [CUDA](software/cuda.md)
   * [Message Passing (MPI)](software/mpi.md)
   * [Math Libraries](software/mathlibs.md)
-  * [AI/ML/DL Frameworks](software/mlframeworks.md)
+  * [Machine Learning](software/ml.md)
   * [Containers](software/containers.md)
   * [Operating Systems](software/os.md)
   * ... and more! [See the full list of examples here](software/software.md)
@@ -36,7 +36,7 @@ This guide includes how-to guides, sample code, recommendations, and technical b
 
 
 ## Introduction to Arm64 and the NVIDIA HPC Developer Kit
-The NVIDIA Arm HPC Developer Kit (simply "DevKit" in this guide) is an integrated hardware and software platform for creating, evaluating, and benchmarking HPC, AI, and scientific computing applications on a heterogeneous GPU- and CPU-accelerated computing system. The kit includes an Arm CPU, an NVIDIA A100 Tensor Core GPU server, and the NVIDIA HPC SDK suite of tools.  [See the product page for more information.](https://developer.nvidia.com/arm-hpc-devkit)
+The NVIDIA Arm HPC Developer Kit (simply "DevKit" in this guide) is an integrated hardware and software platform for creating, evaluating, and benchmarking HPC, AI, and scientific computing applications on a heterogeneous GPU- and CPU-accelerated computing system. The kit includes an Arm CPU, dual NVIDIA A100 Tensor Core GPUs, and the NVIDIA HPC SDK suite of tools.  [See the product page for more information.](https://developer.nvidia.com/arm-hpc-devkit)
 
 This validated platform provides quick and easy bring-up and a stable environment for accelerated code execution and evaluation, performance analysis, system experimentation, and system characterization.
  * Delivers a validated system for quick and easy bring-up in familiar HPC environments
@@ -63,14 +63,14 @@ This guide will call out differences between Arm64 CPUs as needed.  Note that th
 
 
 ## Additional resources
- * [NVIDIA HPC DevKit](https://developer.nvidia.com/arm-hpc-devkit)
+ * [NVIDIA Arm HPC Developer Kit](https://developer.nvidia.com/arm-hpc-devkit)
  * [Neoverse N1 Software Optimization Guide](https://documentation-service.arm.com/static/5f05e93dcafe527e86f61acd)
  * [Armv8 reference manual](https://documentation-service.arm.com/static/60119835773bb020e3de6fee)
  * [Package repository search tool](https://pkgs.org/)
 
 
 # Acknowledgements
-This guide was inspired by and borrows from the excellent [AWS Gravton Getting Started Guide](https://github.com/aws/aws-graviton-getting-started).  The authors of this guide gratefully acknowledge the work of the AWS engineers and sincerely thank AWS for freely providing this valuable information in the public domain.
+This guide was inspired by and borrows from the excellent [AWS Graviton Getting Started Guide](https://github.com/aws/aws-graviton-getting-started).  The authors of this guide gratefully acknowledge the work of the AWS engineers and thank AWS for freely providing this valuable information in the public domain.
 
 
 **Feedback?** jlinford@nvidia.com

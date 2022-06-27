@@ -22,12 +22,12 @@ The following transition guide is organized into a logical sequence of steps as 
 
 **Step 1 - [Optional] Understand the NVIDIA Arm HPC Developer Kit and review key documentation**
 
-1. [Optional] Start by reviewing [the NVIDIA Arm HPC Developer Kit product page](https://developer.nvidia.com/arm-hpc-devkit).
-2. [Optional] Watch these recommended presentations to learn more about getting started, porting and tuning applications, and expected performance for key applications:
- * [First hands-on experiences using the NVIDIA Arm HPC Developer Kit](https://www.nvidia.com/en-us/on-demand/session/gtcspring22-s41624/?playlistId=playList-de66fcc9-9c4e-423e-8b03-01e229c610e0)
- * [Getting started with ARM software development: 86 the x86 dependencies in your code](https://www.nvidia.com/en-us/on-demand/session/gtcspring22-s41702/?playlistId=playList-de66fcc9-9c4e-423e-8b03-01e229c610e0)
- * [Port, Profile, and Tune HPC Applications for Arm-based Supercomputers](https://www.nvidia.com/en-us/on-demand/session/gtcspring22-s41788/?playlistId=playList-de66fcc9-9c4e-423e-8b03-01e229c610e0)
- * [Introducing Developer Tools for Arm and NVIDIA systems](https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s32163/?playlistId=playList-de66fcc9-9c4e-423e-8b03-01e229c610e0)
+* [Optional] Start by reviewing [the NVIDIA Arm HPC Developer Kit product page](https://developer.nvidia.com/arm-hpc-devkit).
+* [Optional] Watch these recommended presentations to learn more about getting started, porting and tuning applications, and expected performance for key applications:
+  * [First hands-on experiences using the NVIDIA Arm HPC Developer Kit](https://www.nvidia.com/en-us/on-demand/session/gtcspring22-s41624/?playlistId=playList-de66fcc9-9c4e-423e-8b03-01e229c610e0)
+  * [Getting started with ARM software development: 86 the x86 dependencies in your code](https://www.nvidia.com/en-us/on-demand/session/gtcspring22-s41702/?playlistId=playList-de66fcc9-9c4e-423e-8b03-01e229c610e0)
+  * [Port, Profile, and Tune HPC Applications for Arm-based Supercomputers](https://www.nvidia.com/en-us/on-demand/session/gtcspring22-s41788/?playlistId=playList-de66fcc9-9c4e-423e-8b03-01e229c610e0)
+  * [Introducing Developer Tools for Arm and NVIDIA systems](https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s32163/?playlistId=playList-de66fcc9-9c4e-423e-8b03-01e229c610e0)
 
 **Step 2 -  Explore your workload, and inventory your current software stack**
 
@@ -79,7 +79,7 @@ Now that you have your application stack on Aarch64, you should run your test su
 
 With your fully functional application its time to establish a performance baseline on Arm64. In most cases, you should expect performance parity, or even gains.  This guide has sections dedicated to [Optimization](optimizing.md) and a [Performance Runbook](perfrunbook/grace_perfrunbook.md) for you to follow during this stage.
 
-### _Appendix A - locating packages for Arm64/Grace_
+### _Appendix A - locating packages for Arm64/_
 
 Remember: When locating software be aware that some tools, including  GCC, refer to the architecture as AArch64, others including the Linux Kernel, call it arm64. When checking packages across various repositories, you’ll find those different naming conventions, and in some cases just "ARM".
 

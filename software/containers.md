@@ -1,4 +1,4 @@
-# Container-based workloads on Arm64
+# Containers on Arm64
 
 Containerization has long been of interest to the Arm community.  Today, Arm64 CPUs are exceptionally well optimized for and can be considered ideal for container-based workloads.
 
