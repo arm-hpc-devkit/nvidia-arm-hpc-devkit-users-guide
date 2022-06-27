@@ -5,8 +5,9 @@ Applications using compiled languages including C, C++ or Go, need to be compile
 
 ## Language Guides
  * [C/C++](c-c++.md)
+ * [Fortran](fortran.md)
+ * [Python](python.md)
+ * [Rust](rust.md)
  * [Go](golang.md)
  * [Java](java.md)
  * [.NET](dotnet.md)
- * [Python](python.md)
- * [Rust](rust.md)

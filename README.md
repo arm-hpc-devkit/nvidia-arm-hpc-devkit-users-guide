@@ -55,7 +55,7 @@ Network	 | 2x NVIDIA® BlueField®-2 E-Series DPU: 200GbE/HDR single-port QSFP56
 
 The DevKit CPU uses the Arm architecture.  The Arm architecture powers over *two hundred billion* chips across practically all computing domains, so the term "Arm" is somewhat overloaded.  Various communities refer to the architecture as "Arm", "ARM", "Arm64", "AArch64", "arm64", etc.  You may also find the term "SBSA" used to refer to server-class Arm CPUs.  For simplicity, this guide will use the term **"Arm64"** to refer to any CPU built on the Armv8 or Armv9 standards and implementing [Arm's Server Base System Architecture (SBSA)](https://developer.arm.com/documentation/den0029/latest).  This includes CPUs like:
 
- * [Ampere Altra](https://amperecomputing.com/processors/ampere-altra/), which powers the DevKit
+ * [Ampere Altra](https://amperecomputing.com/processors/ampere-altra/) (NVIDIA Arm HPC Developer Kit)
  * [NVIDIA Grace](https://www.nvidia.com/en-us/data-center/grace-cpu/)
  * [AWS Graviton](https://aws.amazon.com/ec2/graviton/) 
  * [Alibaba Yitian](https://fuse.wikichip.org/news/tag/yitian-710/)
