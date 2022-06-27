@@ -4,38 +4,38 @@ This guide includes how-to guides, sample code, recommendations, and technical b
 
 ## Contents
 * [Introduction to Arm64 and the NVIDIA Arm HPC Developer Kit](#introduction-to-arm64-and-the-nvidia-hpc-developer-kit)
-* [Transitioning Workloads to Arm64](#transitioning-workloads-to-arm64)
+* [Transitioning Workloads to Arm64](transition-guide.md)
   * [Commercial Software (ISV)](isv.md)
-* [Examples](examples.md) 
-  * [OpenFOAM](apps/openfoam.md)
-  * [WRF](apps/wrf.md)
-  * [BWA-MEM2](apps/bwa-mem2.md)
-  * [On-CPU Inference with TensorFlow](apps/tensorflow-cpu.md)
-  * ... and more! [See this page](applications.md)
-* [Supported Software](software.md)
-  * [PyTorch](apps/pytorch-gpu.md), [TensorFlow](apps/tensorflow-gpu.md), and[TensorRT](tensorrt.md)
-  * [Compilers](compilers.md) and [CUDA](cuda.md)
-  * [Message Passing (MPI)](mpi.md)
-  * [Math Libraries](mathlibs.md)
-  * [Containers](containers.md)
-  * [Operating Systems](os.md)
-  * ... and more!  [See below](#software-ecosystem)
-* [Optimizing for Arm64](optimizing.md)
-  * [Arm SIMD Instructions: SVE and NEON](vectorization.md)
-  * [Arm Atomic Instructions: LSE](optimizing.md#locksynchronization-intensive-workload)
+* [Examples](examples/examples.md) (See [the full list](examples/examples.md))
+  * [OpenFOAM](examples/openfoam.md)
+  * [WRF](examples/wrf.md)
+  * [BWA-MEM2](examples/bwa-mem2.md)
+  * [On-CPU Inference with TensorFlow](examples/tensorflow-cpu.md)
+  * ... and more! [See the full list of examples here](examples/examples.md)
+* [Supported Software](software/software.md)
+  * [Compilers](software/compilers.md)
+  * [CUDA](software/cuda.md)
+  * [Message Passing (MPI)](software/mpi.md)
+  * [Math Libraries](software/mathlibs.md)
+  * [AI/ML/DL Frameworks](software/mlframeworks.md)
+  * [Containers](software/containers.md)
+  * [Operating Systems](software/os.md)
+  * ... and more! [See the full list of examples here](software/software.md)
+* [Optimizing for Arm64](optimization/optimization.md)
+  * [Arm SIMD Instructions: SVE and NEON](optimization/vectorization.md)
+  * [Arm Atomic Instructions: LSE](optimization/optimization.md#locksynchronization-intensive-workload)
 * [Language-specific Considerations](#language-specific-considerations)
-  * [C/C++](langs/c-c++.md)
-  * [Go](langs/golang.md)
-  * [Java](langs/java.md)
-  * [.NET](langs/dotnet.md)
-  * [Python](langs/python.md)
-  * [Rust](langs/rust.md) 
+  * [C/C++](languages/c-c++.md)
+  * [Go](languages/golang.md)
+  * [Java](languages/java.md)
+  * [.NET](languages/dotnet.md)
+  * [Python](languages/python.md)
+  * [Rust](languages/rust.md) 
 * [Additional Resources](#additional-resources)
 * [Acknowledgements](#acknowledgements)
 
 
 ## Introduction to Arm64 and the NVIDIA HPC Developer Kit
-
 The NVIDIA Arm HPC Developer Kit (simply "DevKit" in this guide) is an integrated hardware and software platform for creating, evaluating, and benchmarking HPC, AI, and scientific computing applications on a heterogeneous GPU- and CPU-accelerated computing system. The kit includes an Arm CPU, an NVIDIA A100 Tensor Core GPU server, and the NVIDIA HPC SDK suite of tools.  [See the product page for more information.](https://developer.nvidia.com/arm-hpc-devkit)
 
 This validated platform provides quick and easy bring-up and a stable environment for accelerated code execution and evaluation, performance analysis, system experimentation, and system characterization.
@@ -60,40 +60,6 @@ The DevKit CPU uses the Arm architecture.  The Arm architecture powers over *two
  * [Alibaba Yitian](https://fuse.wikichip.org/news/tag/yitian-710/)
 
 This guide will call out differences between Arm64 CPUs as needed.  Note that this guide is not intended for mobile and embedded Arm CPUs e.g. NVIDIA Tegra.  While many of the general principles and approaches presented here will hold true for mobile and embedded Arm platforms, this guide is focused on server-class platforms.
-
-## Transitioning Workloads to Arm64
-If you are new to Arm64 and want to understand how to identify target workloads, how to plan a transition project, how to test your workloads, and finally how to deploy in production, please read [the key considerations to take into account when transitioning workloads to Arm64](transition-guide.md)
-
-### Commercial Independent Software Vendors (ISV)
-There is a large and growing set of Independent Software Vendor (ISV) software available for Arm64.  As an example, an _incomplete, non-exhaustive_ list of products publicly listing Arm64 support can be found [here](isv.md). If your favorite ISV product isn't listed, it **does not** mean it's not supported on Arm64.  Check with the respective ISV to ensure they already, or have plans to, support Arm64.
-
-
-## Application Examples
-
-Following an example is a great way to get started with a new system.  Here are a few examples of representative codes from major HPC application areas.  You can use these to get a sense for how applications generally work on Arm64.
-
-  * [OpenFOAM](openfoam.md)
-  * [WRF](wrf.md)
-  * [On-CPU Inference with TensorFlow](tensorflow.md)
-
-## Supported Software
-
-
-
-
-## Optimizing for Arm64
-Please see [here](optimizing.md) for general debugging and profiling information.
-
-
-## Language-specific Considerations
-Applications built using interpreted or JIT'd languages should run as-is. Applications using compiled languages including C, C++ or Go, need to be compiled for the Arm64 architecture. Most modern builds (e.g. using Make) will just work when run natively on Arm64.  You’ll find language-specific recommendations below.  If there is no language-specific section, it is because there is no guidance beyond using a suitably current version of the language.
-
- * [C/C++](c-c++.md)
- * [Go](golang.md)
- * [Java](java.md)
- * [.NET](dotnet.md)
- * [Python](python.md)
- * [Rust](rust.md)
 
 
 ## Additional resources
