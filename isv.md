@@ -6,8 +6,8 @@ There is a large and growing set of Independent Software Vendor (ISV) software a
 
 | Category | ISV | Product | Resources |
 | --- | --- | --- | --- |
-| Data Science & Machine Learning | [Anaconda](https://partners.amazonaws.com/partners/0010L00001qFzbyQAC) | [Anaconda](https://www.anaconda.com/products/commercial-edition) | Release: https://docs.anaconda.com/anaconda/install/graviton2/, https://repo.anaconda.com/pkgs/main/linux-aarch64/<br>Announcement: https://www.anaconda.com/blog/anaconda-aws-graviton2 |
-| Fluid Dynamics | [CFD Direct](https://partners.amazonaws.com/partners/001E000001JVfzMIAT) | [CFD Direct From the Cloud](https://cfd.direct/cloud/aws/) | Release: https://aws.amazon.com/marketplace/pp/B08CHKT98H<br>Announcement: https://cfd.direct/cloud/cfddfc-arm-aws-c6g/ |
+| Data Science & Machine Learning | [Anaconda](https://anaconda.com/) | [Anaconda](https://www.anaconda.com/products/commercial-edition) | Release: https://docs.anaconda.com/anaconda/install/graviton2/<br>Announcement: https://www.anaconda.com/blog/anaconda-aws-graviton2 |
+| Fluid Dynamics | [CFD Direct](https://cfd.direct/) | [CFD Direct From the Cloud](https://cfd.direct/cloud/aws/) | Release: https://cfd.direct/cloud/cfddfc-v9/<br>Announcement: https://cfd.direct/cloud/cfddfc-arm-aws-c6g/ |
 
 ### HPC Codes for A64FX
 
