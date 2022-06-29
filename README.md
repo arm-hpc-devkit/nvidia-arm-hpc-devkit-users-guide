@@ -6,15 +6,18 @@ This guide includes how-to guides, sample code, recommendations, and technical b
 * [Introduction to Arm64 and the NVIDIA Arm HPC Developer Kit](#introduction-to-arm64-and-the-nvidia-hpc-developer-kit)
 * [Transitioning Workloads to Arm64](transition-guide.md)
   * [Commercial Software (ISV)](isv.md)
-* [Examples](examples/examples.md) (See [the full list](examples/examples.md))
-  * Modeling and Simulation
+* [Examples](examples/examples.md)
+  * [Modeling and Simulation](examples/examples.md#modeling-and-simulation)
     * [OpenFOAM](examples/openfoam.md)
     * [WRF](examples/wrf.md)
     * [BWA-MEM2](examples/bwa-mem2.md)
-  * Machine Learning
+    * [... see all mod-sim examples](examples/examples.md#modeling-and-simulation)
+  * [Machine Learning](examples/examples.md#machine-learning)
     * [On-CPU Inference with TensorFlow](examples/tensorflow-cpu.md)
-  * Data Science
+    * [... see all ML examples](examples/examples.md#machine-learning)
+  * [Data Science](examples/examples.md#data-science)
     * [RAPIDS](examples/rapids.md)
+    * [... see all DS examples](examples/examples.md#data-science)
   * ... and more! [See the full list of examples here](examples/examples.md)
 * [Supported Software](software/software.md) (See [the full list](software/software.md))
   * [Machine Learning](software/ml.md)
