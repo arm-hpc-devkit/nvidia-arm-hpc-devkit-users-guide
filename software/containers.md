@@ -1,6 +1,73 @@
 # Containers on Arm64
 
-Containerization has long been of interest to the Arm community.  Today, Arm64 CPUs are exceptionally well optimized for and can be considered ideal for container-based workloads.
+Containerization has long been of interest to the Arm community.  Today, Arm64 CPUs are ideal for container-based workloads.
+
+## NVIDIA Container Toolkit
+
+The [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker) allows users to build and run GPU accelerated  containers. The toolkit includes a container runtime library and utilities to automatically configure containers to leverage NVIDIA GPUs.  Follow this installation guide to get started: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
+
+As an example, here are the steps for installing NVIDIA Container Toolkit on Ubuntu 20.04 with Podman:
+
+```bash
+# Install Docker from distro repository
+sudo apt install docker.io
+
+# Enable docker service
+sudo systemctl --now enable docker
+
+# Add the NVIDIA Container Toolkit repository
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
+      && curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+      && curl -s -L https://nvidia.github.io/libnvidia-container/$distribution/libnvidia-container.list | \
+            sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+            sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+
+# Install NVIDIA Container Toolkit
+sudo apt update
+sudo apt install nvidia-docker2
+
+# Restart docker services to enable GPU support
+sudo systemctl restart docker
+
+# Run a simple test using the CUDA multi-arch container
+sudo docker run --rm --gpus all nvidia/cuda:11.0.3-base-ubuntu18.04 nvidia-smi
+Unable to find image 'nvidia/cuda:11.0.3-base-ubuntu18.04' locally
+11.0.3-base-ubuntu18.04: Pulling from nvidia/cuda
+e196da37f904: Pull complete
+0b7ba59c359b: Pull complete
+84bc5f8689bc: Pull complete
+b926124172ef: Pull complete
+fef6c6f16e98: Pull complete
+Digest: sha256:f7b595695b06ad8590aed1accd6437ba068ca44e71c5cf9c11c8cb799c2d8335
+Status: Downloaded newer image for nvidia/cuda:11.0.3-base-ubuntu18.04
+Thu Jul  7 17:57:04 2022
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 510.73.08    Driver Version: 510.73.08    CUDA Version: 11.6     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|                               |                      |               MIG M. |
+|===============================+======================+======================|
+|   0  NVIDIA A100 80G...  Off  | 0000000C:01:00.0 Off |                    0 |
+| N/A   44C    P0    65W / 300W |      0MiB / 81920MiB |      0%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+|   1  NVIDIA A100 80G...  Off  | 0000000D:01:00.0 Off |                    0 |
+| N/A   36C    P0    63W / 300W |      0MiB / 81920MiB |      2%      Default |
+|                               |                      |             Disabled |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                                  |
+|  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+|        ID   ID                                                   Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+```
+
+
+
 
 ## Preparing for Arm64
 
