@@ -8,6 +8,7 @@ There is a large and growing set of Independent Software Vendor (ISV) software a
 | --- | --- | --- | --- |
 | Data Science & Machine Learning | [Anaconda](https://anaconda.com/) | [Anaconda](https://www.anaconda.com/products/commercial-edition) | Release: https://docs.anaconda.com/anaconda/install/graviton2/<br>Announcement: https://www.anaconda.com/blog/anaconda-aws-graviton2 |
 | Fluid Dynamics | [CFD Direct](https://cfd.direct/) | [CFD Direct From the Cloud](https://cfd.direct/cloud/aws/) | Release: https://cfd.direct/cloud/cfddfc-v9/<br>Announcement: https://cfd.direct/cloud/cfddfc-arm-aws-c6g/ |
+| Structural Analysis | [ANSYS](https://www.ansys.com/) | [LS-DYNA](https://www.ansys.com/products/structures/ansys-ls-dyna) | Release: Contact ANSYS<br>Graviton 3: https://aws.amazon.com/ec2/instance-types/c7g/<br>A64FX: https://www.hpcwire.com/off-the-wire/ansys-ls-dyna-software-now-supports-fujitsus-primehpc-supercomputers/
 
 ### HPC Codes for A64FX
 
@@ -24,7 +25,6 @@ The following ISV codes have been ported to the Fujitsu A64FX.  These codes **ha
 | Fluid Dynamics | [Siemens Digital Industries Software](https://www.sw.siemens.com/en-US/) | [Simcenter STAR-CCM+](https://www.plm.automation.siemens.com/global/en/products/simcenter/STAR-CCM.html) | Arm64 support in progress<br>Information: https://www.fujitsu.com/downloads/SUPER/topics/sc21/sc21-applications-for-primehpc-non-video.pdf
 | Molecular Dynamics | [University of California](https://ambermd.org/) | [AMBER](https://ambermd.org/) | Release: Available on Fujitsu A64FX CPU<br>Information: https://www.fujitsu.com/downloads/SUPER/topics/sc21/sc21-applications-for-primehpc-non-video.pdf
 | Quantum Chemistry | [Gaussian](https://gaussian.com/) | [Gaussian16](https://gaussian.com/gaussian16/) | Release: Available on Fujitsu A64FX CPU<br>Information: https://www.fujitsu.com/downloads/SUPER/topics/sc21/sc21-applications-for-primehpc-non-video.pdf
-| Structural Analysis | [ANSYS](https://www.ansys.com/) | [Ansys LS-DYNA](https://www.ansys.com/products/structures/ansys-ls-dyna) | Release: Available on Fujitsu A64FX CPU<br>Information: https://www.hpcwire.com/off-the-wire/ansys-ls-dyna-software-now-supports-fujitsus-primehpc-supercomputers/
 | Structural Analysis | [ESI Group](https://www.esi-group.com/) | [Virtual Performance Solution](https://www.esi-group.com/products/virtual-performance-solution)(*) | Only selected features, and only on Fujitsu A64FX CPU<br>Information: https://www.fujitsu.com/downloads/SUPER/topics/sc21/sc21-applications-for-primehpc-non-video.pdf
 
 
