@@ -31,6 +31,9 @@ The following ISV codes have been ported to the Fujitsu A64FX.  These codes **ha
 
 ## Cloud Services and Infrastructure
 
+The AWS Graviton 2 CPU uses the same core architecture as the Ampere Altra CPU, which powers the NVIDIA Arm HPC DevKit, so many ISVs available on AWS Graviton will also work on the DevKit.  The list below is primarily useful for AWS Graviton users, but it also demonstrates the breadth of closed-source applications available for Arm64.
+
+
 | Category | ISV | Product | Resources |
 | --- | --- | --- | --- |
 | Analytics | [Databricks](https://partners.amazonaws.com/partners/001E0000016WxP5IAK/Databricks) | [Databricks Lakehouse](https://databricks.com/product/data-lakehouse) | Announcement: https://databricks.com/blog/2022/04/18/announcing-databricks-support-for-aws-graviton2-with-up-to-3x-better-price-performance.html<br>Documentation: https://docs.databricks.com/clusters/graviton.html |

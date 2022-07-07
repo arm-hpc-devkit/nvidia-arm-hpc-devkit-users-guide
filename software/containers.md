@@ -6,11 +6,18 @@ Containerization has long been of interest to the Arm community.  Today, Arm64 C
 
 The [NVIDIA Container Toolkit](https://github.com/NVIDIA/nvidia-docker) allows users to build and run GPU accelerated  containers. The toolkit includes a container runtime library and utilities to automatically configure containers to leverage NVIDIA GPUs.  Follow this installation guide to get started: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
 
-As an example, here are the steps for installing NVIDIA Container Toolkit on Ubuntu 20.04 with Podman:
+As an example, here are the steps for installing NVIDIA Container Toolkit on Ubuntu 20.04 with Docker.  Note that other container frameworks like Podman are also supported.
 
 ```bash
-# Install Docker from distro repository
-sudo apt install docker.io
+# Install Docker dependencies
+sudo apt-get install ca-certificates curl gnupg lsb-release
+
+# Add Docker repo
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Install Docker
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 # Enable docker service
 sudo systemctl --now enable docker

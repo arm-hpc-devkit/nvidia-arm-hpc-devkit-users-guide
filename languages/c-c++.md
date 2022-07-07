@@ -1,7 +1,7 @@
 # C/C++ on Arm64
 
 ## Enabling Arm Architecture Specific Features
-On Arm64, `-mcpu=` acts as both specifying the appropriate architecture and tuning and it's generally better to use that vs `-march` or `-mtune` if you're building for a specific CPU.  You can find additional details in this [presentation from Arm Inc. to Stony Brook University](https://www.stonybrook.edu/commcms/ookami/_pdf/Linford_OokamiUGM_2022.pdf).
+For GCC on Arm64, `-mcpu=` acts as both specifying the appropriate architecture and tuning and it's generally better to use that vs `-march` or `-mtune` if you're building for a specific CPU.  You can find additional details in this [presentation from Arm Inc. to Stony Brook University](https://www.stonybrook.edu/commcms/ookami/_pdf/Linford_OokamiUGM_2022.pdf).
 
 CPU       | Flag    | GCC version      | LLVM verison
 ----------|---------|-------------------|-------------
@@ -13,7 +13,7 @@ Whenever possible, please use the latest compiler version available on your syst
 
 Distribution    | GCC                  | Clang/LLVM
 ----------------|----------------------|-------------
-Ubuntu 22.04    | 9, 10, 11*, 12         | 11, 12, 13, 14*
+Ubuntu 22.04    | 9, 10, 11*, 12       | 11, 12, 13, 14*
 Ubuntu 20.04    | 7, 8, 9*, 10         | 6, 7, 8, 9, 10, 11, 12
 Ubuntu 18.04    | 4.8, 5, 6, 7*, 8     | 3.9, 4, 5, 6, 7, 8, 9, 10
 Debian10        | 7, 8*                | 6, 7, 8
@@ -59,6 +59,7 @@ The C standard doesn't specify the signedness of char. On x86 char is signed by
 default while on Arm it is unsigned by default. This can be addressed by using
 standard int types that explicitly specify the signedness (e.g. `uint8_t` and `int8_t`)
 or compile with `-fsigned-char`.
+
 
 ## Arm Instructions for Machine Learning
 Many Arm64 CPUs support [Arm dot-product instructions](https://community.arm.com/developer/tools-software/tools/b/tools-software-ides-blog/posts/exploring-the-arm-dot-product-instructions) commonly used for Machine Learning (quantized) inference workloads, and [Half precision floating point (FP16)](https://developer.arm.com/documentation/100067/0612/Other-Compiler-specific-Features/Half-precision-floating-point-intrinsics).  These features enable performant and power efficient machine learning by doubling the number of operations per second and reducing the memory footprint compared to single precision floating point (\_float32), all while still enjoying large dynamic range.  Compiling with `-mcpu=native` will enable these features, when available.  [See this detailed guide on running TensorFlow on the NVIDIA Arm HPC DevKit for more information.](tensorflow.md)

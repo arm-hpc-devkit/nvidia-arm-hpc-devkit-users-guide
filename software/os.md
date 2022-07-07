@@ -1,6 +1,6 @@
 # Operating Systems on Arm64
 
-Current versions of popular Linux distributions (Ubuntu, RedHat, etc.) support Arm64 to the same level as other architectures.  The NVIDIA Arm HPC Developer Kit has been internally tested and qualified using Ubuntu 20.04 and RHEL 8.4 operating systems, but other distributions may also work.  Check 
+Current versions of popular Linux distributions (Ubuntu, RedHat, etc.) support Arm64 to the same level as other architectures.  The NVIDIA Arm HPC Developer Kit has been internally tested and qualified using Ubuntu 20.04 and RHEL 8.4 operating systems, but other distributions may also work.
 
 
 ## RedHat Enterprise Linux and Derivatives
