@@ -3,18 +3,20 @@ Following these step-by-step instructions is a great way to get started with you
 
 ## Benchmarks and Health Tests
 
-These benchmarks were generated from a known-good NVIDIA Arm HPC DevKit and provide a _lower bound_ for expected performance.  They can be used to determine if your system is correctly configured and operating properly.  It's possible you may exceed these numbers.  They are not indented for use in any competitive analysis of the NVIDIA Arm HPC DevKit hardware.
+These benchmarks were generated from a known-good NVIDIA Arm HPC DevKit and provide a _lower bound_ for expected out-of-the-box performance.  They can be used to determine if your system is configured correctly and operating properly.  It's possible you may exceed these numbers.  **They are not indented for use in any competitive analysis.**
 
- * [NVIDIA HPC-Benchmarks](nvidia-hpc-benchmarks.md)
  * [HPL on CPU](hpl-cpu.md)
  * [HPCG on CPU](hpcg-cpu.md)
  * [STREAM on CPU](stream-cpu.md)
 
 ## Modeling and Simulation
 
+The high memory bandwidth of the Ampere Altra CPU makes it an excellent platform for CPU-only HPC applications.  
+
   * [OpenFOAM](openfoam.md)
   * [WRF](wrf.md)
   * [BWA-MEM2](bwa-mem2.md)
+  * [GROMACS](gromacs.md)
 
 ## Machine Learning
 
