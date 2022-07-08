@@ -50,9 +50,8 @@ are missing for Arm64 is to grep the code for `__x86_64__` `ifdef`s and see if t
 is corresponding Arm64 code there too. If not, that might be something to improve.
 
 ### Lock/Synchronization intensive workload
-LSE based locking and synchronization
-is an order of magnitude faster for highly contended locks with high core counts.
-For workloads that have highly contended locks, compiling with the appropriate `-mcpu` flag will enable LSE atomics and can substantially increase performance.
+All server-class Arm64 processors support low-cost atomic operations which can improve system throughput for CPU-to-CPU communication, locks, and mutexes. On recent Arm64 CPUs, the improvement can be up to an order of magnitude when using LSE atomics instead of load/store exclusives.  See [Locks, Synchronization, and Atomics](atomics.md) for details.
+
 
 ## Profiling the code
 If you aren't getting the performance you expect, one of the best ways to understand what is

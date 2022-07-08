@@ -28,7 +28,7 @@ zlib    | 1.2.8+  | For the best performance on Arm64 please use [zlib-cloudflar
 
 ### Postgres
 Postgres performance can be heavily impacted by not using [LSE](langs/c-c++.md#large-system-extensions-lse).
-Today, postgres binaries from distributions (e.g. Ubuntu) are not built with `-moutline-atomics` or `-march=armv8.2-a` which would enable LSE.  Note: Amazon RDS for PostgreSQL isn't impacted by this. 
+Today, postgres binaries from distributions (e.g. Ubuntu) are not built with `-moutline-atomics` or `-march=armv8.2-a` which would enable LSE. 
 
 In November 2021 PostgreSQL started to distribute Ubuntu 20.04 packages optimized with `-moutline-atomics`.
 For Ubuntu 20.04, we recommend using the PostgreSQL PPA instead of the packages distributed by Ubuntu Focal.

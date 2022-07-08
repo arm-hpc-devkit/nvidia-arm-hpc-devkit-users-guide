@@ -23,7 +23,7 @@ performance for the following standard library packages:
 The main implementation of the Go compiler, [golang/go](https://github.com/golang/go), has improved
 performance on Arm with couple of changes listed below. Building your project with Go 1.16 will give you these improvements:
 
- * [ARMv8.1-A Atomics instructions](https://go-review.googlesource.com/c/go/+/234217), which dramatically improve mutex fairness and speed on modern Arm cores with v8.1 and newer instruction set.
+ * [ARMv8.1-A LSE atomic instructions](https://go-review.googlesource.com/c/go/+/234217), which dramatically improve mutex fairness and speed on modern Arm cores with v8.1 and newer instruction set.
  * [copy performance improvements](https://go-review.googlesource.com/c/go/+/243357), especially when the addresses are unaligned.
 
 

@@ -22,21 +22,41 @@ SUSE Linux ES15 | 7*, 9, 10            | 7
 
 
 ## Large-System Extensions (LSE)
-All Arm64 processors have support for the Large-System Extension (LSE) which was first introduced in Armv8.1. LSE provides low-cost atomic operations which can improve system throughput for CPU-to-CPU communication, locks, and mutexes. The improvement can be up to an order of magnitude when using LSE instead of load/store exclusives.
+All server-class Arm64 processors support low-cost atomic operations which can improve system throughput for CPU-to-CPU communication, locks, and mutexes. On recent Arm64 CPUs, the improvement can be up to an order of magnitude when using LSE atomics instead of load/store exclusives.  See [Locks, Synchronization, and Atomics](atomics.md) for details.
 
-The POSIX threads library needs LSE atomic instructions.  LSE is important for locking and thread synchronization routines.  The following systems distribute a libc compiled with LSE instructions:
-- Ubuntu 18.04 (needs `apt install libc6-lse`),
-- Ubuntu 20.04,
-- Ubuntu 22.04.
-
-The compiler needs to generate LSE instructions for applications that use atomic operations.  For example, the code of databases like PostgreSQL contain atomic constructs; c++11 code with std::atomic statements translate into atomic operations.  GCC's `-mcpu=native` flag enables all instructions supported by the host CPU, including LSE.  To confirm that LSE instructions are created, the output of `objdump` command line utility should contain LSE instructions:
-```
+GCC's `-mcpu=native` flag enables all instructions supported by the host CPU, including LSE.  To confirm that LSE instructions are used, the output of the `objdump` command line utility should contain LSE instructions:
+```bash
 $ objdump -d app | grep -i 'cas\|casp\|swp\|ldadd\|stadd\|ldclr\|stclr\|ldeor\|steor\|ldset\|stset\|ldsmax\|stsmax\|ldsmin\|stsmin\|ldumax\|stumax\|ldumin\|stumin' | wc -l
 ```
 To check whether the application binary contains load and store exclusives:
-```
+```bash
 $ objdump -d app | grep -i 'ldxr\|ldaxr\|stxr\|stlxr' | wc -l
 ```
+
+You can check which Arm features GCC will enable with the `-mcpu=native` flag by using this command:
+```bash
+gcc -dM -E -mcpu=native - < /dev/null | grep ARM_FEATURE
+```
+For example, on the Ampere Altra CPU with GCC 9.4, we see "`__ARM_FEATURE_ATOMICS 1
+`" indicating that LSE atomics are enabled:
+```c
+gcc -dM -E -mcpu=native - < /dev/null | grep ARM_FEATURE
+#define __ARM_FEATURE_ATOMICS 1
+#define __ARM_FEATURE_UNALIGNED 1
+#define __ARM_FEATURE_AES 1
+#define __ARM_FEATURE_IDIV 1
+#define __ARM_FEATURE_QRDMX 1
+#define __ARM_FEATURE_DOTPROD 1
+#define __ARM_FEATURE_CRYPTO 1
+#define __ARM_FEATURE_FP16_SCALAR_ARITHMETIC 1
+#define __ARM_FEATURE_FP16_VECTOR_ARITHMETIC 1
+#define __ARM_FEATURE_FMA 1
+#define __ARM_FEATURE_CLZ 1
+#define __ARM_FEATURE_SHA2 1
+#define __ARM_FEATURE_CRC32 1
+#define __ARM_FEATURE_NUMERIC_MAXMIN 1
+```
+
 
 ## Porting SSE or AVX Intrinsics to NEON
 When programs contain code with x64 intrinsics, the following procedure can help
