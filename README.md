@@ -7,11 +7,10 @@ This guide includes how-to guides, sample code, recommendations, and technical b
 * [Transitioning Workloads to Arm64](transition-guide.md)
   * [Commercial Software (ISV)](isv.md)
 * [Examples](examples/examples.md)
-  * Benchmarks and Health Tests
-    * NVIDIA HPC-Benchmarks
-    * HPL on CPU
-    * HPCG on CPU
-    * STREAM on CPU
+  * [Benchmarks and Health Tests](examples/examples.md#benchmarks-and-health-tests)
+    * [HPL on CPU](examples/hpl-cpu.md)
+    * [HPCG on CPU](examples/hpcg-cpu.md)
+    * [STREAM on CPU](examples/stream-cpu.md)
   * [Modeling and Simulation](examples/examples.md#modeling-and-simulation)
     * [OpenFOAM](examples/openfoam.md)
     * [WRF](examples/wrf.md)
