@@ -34,7 +34,7 @@ This guide includes how-to guides, sample code, recommendations, and technical b
   * ... and more! [See here for more details](software/software.md)
 * [Optimizing for Arm64](optimization/optimization.md)
   * [Arm SIMD Instructions: SVE and NEON](optimization/vectorization.md)
-  * [Arm Atomic Instructions: LSE](optimization/optimization.md#locksynchronization-intensive-workload)
+  * [Arm Atomic Instructions: LSE](optimization/atomics.md)
 * [Language-specific Considerations](languages/languages.md)
   * [C/C++](languages/c-c++.md)
   * [Fortran](languages/fortran.md)
