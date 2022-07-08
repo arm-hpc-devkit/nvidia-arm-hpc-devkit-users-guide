@@ -4,7 +4,7 @@ Today, Arm CPUs power application servers, micro-services, high-performance comp
 
 ## Introduction - Identifying Target Workloads
 
-The quickest and easiest workloads to transition are Linux-based, and built using open-source components or in-house applications where you control the source code. Many open source projects already support Arm64, and having access to the source code allows you to build from source if pre-built artifacts do not already exist. There is also a large and growing set of Independent Software Vendor (ISV) software available for Arm64 (a non-exhaustive list can be found [here](isv.md). However if you license software you’ll want to check with the respective ISV to ensure they already, or have plans to, support Arm.
+The quickest and easiest workloads to transition are Linux-based, and built using open-source components or in-house applications where you control the source code. Many open source projects already support Arm64, and having access to the source code allows you to build from source if pre-built artifacts do not already exist. There is also a large and growing set of Independent Software Vendor (ISV) software available for Arm64 (e.g. a non-exhaustive list can be found [here](isv.md)). However if you license software you’ll want to check with the respective ISV to ensure they already, or have plans to, support Arm.
 
 The following transition guide is organized into a logical sequence of steps as follows:
 
@@ -33,7 +33,7 @@ The following transition guide is organized into a logical sequence of steps as 
 
 Before starting the transition, you will need to inventory your current software stack so you can identify the path to equivalent software versions that support Arm64. At this stage it can be useful to think in terms of software you download (e.g. open source packages, container images, libraries), software you build and software you procure/license. Areas to review:
 
-* [Operating system](os.md), pay attention to specific versions that support Arm64 (usually more recent are better)
+* [Operating system](os.md): pay attention to specific versions that support Arm64 (usually more recent are better)
 * If your workload is container based, check container images you consume for Arm64 support. Keep in mind, many container images now support multiple architectures which simplifies consumption of those images in a mixed-architecture environment. 
 * All the libraries, frameworks and runtimes used by the application.
 * Tools used to build, deploy and test your application (e.g. compilers, test suites, CI/CD pipelines, provisioning tools and scripts). Note there are language specific sections in this getting started guide with useful pointers to getting the best performance from Arm64 processors.
