@@ -24,16 +24,9 @@ SUSE Linux ES15 | 7*, 9, 10            | 7
 ## Large-System Extensions (LSE)
 All server-class Arm64 processors support low-cost atomic operations which can improve system throughput for CPU-to-CPU communication, locks, and mutexes. On recent Arm64 CPUs, the improvement can be up to an order of magnitude when using LSE atomics instead of load/store exclusives.  See [Locks, Synchronization, and Atomics](atomics.md) for details.
 
-GCC's `-mcpu=native` flag enables all instructions supported by the host CPU, including LSE.  To confirm that LSE instructions are used, the output of the `objdump` command line utility should contain LSE instructions:
-```bash
-$ objdump -d app | grep -i 'cas\|casp\|swp\|ldadd\|stadd\|ldclr\|stclr\|ldeor\|steor\|ldset\|stset\|ldsmax\|stsmax\|ldsmin\|stsmin\|ldumax\|stumax\|ldumin\|stumin' | wc -l
-```
-To check whether the application binary contains load and store exclusives:
-```bash
-$ objdump -d app | grep -i 'ldxr\|ldaxr\|stxr\|stlxr' | wc -l
-```
+### Enabling LSE
 
-You can check which Arm features GCC will enable with the `-mcpu=native` flag by using this command:
+GCC's `-mcpu=native` flag enables all instructions supported by the host CPU, including LSE.  If you're cross compiling, use the appropriate `-mcpu` option for your target CPU, e.g. `-mcpu=neoverse-n1` for the Ampere Altra CPU. You can check which Arm features GCC will enable with the `-mcpu=native` flag by using this command:
 ```bash
 gcc -dM -E -mcpu=native - < /dev/null | grep ARM_FEATURE
 ```
@@ -57,11 +50,17 @@ gcc -dM -E -mcpu=native - < /dev/null | grep ARM_FEATURE
 #define __ARM_FEATURE_NUMERIC_MAXMIN 1
 ```
 
+### Checking for LSE in a binary
+To confirm that LSE instructions are used, the output of the `objdump` command line utility should contain LSE instructions:
+```bash
+$ objdump -d app | grep -i 'cas\|casp\|swp\|ldadd\|stadd\|ldclr\|stclr\|ldeor\|steor\|ldset\|stset\|ldsmax\|stsmax\|ldsmin\|stsmin\|ldumax\|stumax\|ldumin\|stumin' | wc -l
+```
+To check whether the application binary contains load and store exclusives:
+```bash
+$ objdump -d app | grep -i 'ldxr\|ldaxr\|stxr\|stlxr' | wc -l
+```
 
-## Porting SSE or AVX Intrinsics to NEON
-When programs contain code with x64 intrinsics, the following procedure can help
-to quickly obtain a working program on Arm64, assess performance, profile hot spots, and improve the quality of code.
-
+## Porting SSE or AVX Intrinsics
 To quickly get a prototype running on Arm64, one can use
 https://github.com/DLTcollab/sse2neon a translator of x64 intrinsics to NEON.
 sse2neon provides a quick starting point in porting performance critical codes
@@ -72,6 +71,8 @@ include files like `xmmintrin.h`, only implemented with NEON instructions to
 produce the exact semantics of the x64 intrinsic.  Once a profile is
 established, the hot paths can be rewritten directly with NEON intrinsics to
 avoid the overhead of the generic sse2neon translation.
+
+Note that GCC's `__sync` built-ins are outdated and may be biased towards the x86 memory model.  Use `__atomic` versions of these functions instead of the `__sync` versions.  See https://gcc.gnu.org/onlinedocs/gcc/_005f_005fatomic-Builtins.html for more details.
 
 
 ## Signed vs. Unsigned char
