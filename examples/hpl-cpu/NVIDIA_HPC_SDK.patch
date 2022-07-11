@@ -1,0 +1,49 @@
+--- Make.NVIDIA_HPC_SDK	2022-07-11 08:12:45.709458000 -0700
++++ Make.NVIDIA_HPC_SDK.patched	2022-07-11 08:09:46.698472000 -0700
+@@ -61,13 +61,13 @@
+ # - Platform identifier ------------------------------------------------
+ # ----------------------------------------------------------------------
+ #
+-ARCH         = UNKNOWN
++ARCH         = NVIDIA_HPC_SDK
+ #
+ # ----------------------------------------------------------------------
+ # - HPL Directory Structure / HPL library ------------------------------
+ # ----------------------------------------------------------------------
+ #
+-TOPdir       = $(HOME)/hpl
++TOPdir       = $(HOME)/benchmarks/hpl-2.3
+ INCdir       = $(TOPdir)/include
+ BINdir       = $(TOPdir)/bin/$(ARCH)
+ LIBdir       = $(TOPdir)/lib/$(ARCH)
+@@ -92,9 +92,9 @@
+ # header files,  LAlib  is defined  to be the name of  the library to be 
+ # used. The variable LAdir is only used for defining LAinc and LAlib.
+ #
+-LAdir        = 
+-LAinc        = 
+-LAlib        = -lblas
++LAdir        = /opt/nvidia/hpc_sdk/Linux_aarch64/22.5/compilers
++LAinc        = -I$(LAdir)/include
++LAlib        = -L$(LAdir)/lib -lblas
+ #
+ # ----------------------------------------------------------------------
+ # - F77 / C interface --------------------------------------------------
+@@ -156,7 +156,7 @@
+ #    *) call the BLAS Fortran 77 interface,
+ #    *) not display detailed timing information.
+ #
+-HPL_OPTS     =
++HPL_OPTS     = -DHPL_CALL_CBLAS -DHPL_DETAILED_TIMING
+ # 
+ # ----------------------------------------------------------------------
+ #
+@@ -170,7 +170,7 @@
+ CCNOOPT      = $(HPL_DEFS) 
+ CCFLAGS      = $(HPL_DEFS) 
+ #
+-LINKER       = mpif77
++LINKER       = mpicc
+ LINKFLAGS    = 
+ #
+ ARCHIVER     = ar
