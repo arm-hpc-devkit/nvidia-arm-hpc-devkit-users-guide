@@ -1,6 +1,3 @@
 # CUDA on Arm64
 
-TBD
-
-CUDA — A parallel computing platform and programming model developed by NVIDIA for general computing on graphical processing units (GPUs).
-
+CUDA is a parallel computing platform and programming model developed by NVIDIA for general computing on GPUs.  NVIDIA has officially supported CUDA on Arm64 starting with CUDA 11.  There is no specific guidance for CUDA on Arm64.  Simply use it as you normally would on any other platform.  CUDA is [provided with the NVIDIA HPC SDK](https://developer.nvidia.com/hpc-sdk), or you can [download the CUDA Toolkit for Arm](https://developer.nvidia.com/cuda-downloads).
