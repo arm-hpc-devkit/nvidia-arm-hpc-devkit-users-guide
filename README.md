@@ -8,7 +8,7 @@ This guide includes how-to guides, sample code, recommendations, and technical b
   * [Commercial Software (ISV)](isv.md)
 * [Examples](examples/examples.md)
   * [Benchmarks and Health Tests](examples/examples.md#benchmarks-and-health-tests)
-    * [HPL on CPU](examples/hpl-cpu.md)
+    * [HPL on CPU](examples/hpl-cpu/hpl-cpu.md)
     * [HPCG on CPU](examples/hpcg-cpu.md)
     * [STREAM on CPU](examples/stream-cpu.md)
   * [Modeling and Simulation](examples/examples.md#modeling-and-simulation)
@@ -47,6 +47,10 @@ This guide includes how-to guides, sample code, recommendations, and technical b
 * [Acknowledgements](#acknowledgements)
 
 
+## Join the NVIDIA Arm Community!
+
+https://join.slack.com/t/nvidia-arm-hpc/shared_invite/zt-1c7oxu2cz-cozj8NWx1Nfv5zGzBnhMAA
+
 ## Introduction to Arm64 and the NVIDIA HPC Developer Kit
 The NVIDIA Arm HPC Developer Kit (simply "DevKit" in this guide) is an integrated hardware and software platform for creating, evaluating, and benchmarking HPC, AI, and scientific computing applications on a heterogeneous GPU- and CPU-accelerated computing system. The kit includes an Arm CPU, dual NVIDIA A100 Tensor Core GPUs, and the NVIDIA HPC SDK suite of tools.  [See the product page for more information.](https://developer.nvidia.com/arm-hpc-devkit)
 
@@ -62,7 +66,7 @@ CPU	     | 1x Ampere Altra Q80-30 (Arm processor)
 GPU	     | 2x NVIDIA A100 GPU
 Memory	 | 512G DDR4 memory
 Storage	 | 6TB SAS/ SATA 3.5″
-Network	 | 2x NVIDIA® BlueField®-2 E-Series DPU: 200GbE/HDR single-port QSFP56
+Network	 | 2x NVIDIA BlueField-2 E-Series DPU: 200GbE/HDR single-port QSFP56
 
 The DevKit CPU uses the Arm architecture.  The Arm architecture powers over *two hundred billion* chips across practically all computing domains, so the term "Arm" is somewhat overloaded.  Various communities refer to the architecture as "Arm", "ARM", "Arm64", "AArch64", "arm64", etc.  You may also find the term "SBSA" used to refer to server-class Arm CPUs.  For simplicity, this guide will use the term **"Arm64"** to refer to any CPU built on the Armv8 or Armv9 standards and implementing [Arm's Server Base System Architecture (SBSA)](https://developer.arm.com/documentation/den0029/latest).  This includes CPUs like:
 
@@ -81,8 +85,17 @@ This guide will call out differences between Arm64 CPUs as needed.  Note that th
  * [Package repository search tool](https://pkgs.org/)
 
 
+# License
+
+[![CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-sa/4.0/)
+
+Unless otherwise indicated, this work is licensed under a
+[Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).  Individual examples or attached source code may be under a different license.  Check the related README or LICENSE files.
+
+
 # Acknowledgements
 This guide was inspired by and borrows from the excellent [AWS Graviton Getting Started Guide](https://github.com/aws/aws-graviton-getting-started).  The authors of this guide gratefully acknowledge the work of the AWS engineers and thank AWS for freely providing this valuable information in the public domain.
 
 
 **Feedback?** jlinford@nvidia.com
+
