@@ -49,7 +49,10 @@ This guide includes how-to guides, sample code, recommendations, and technical b
 
 ## Join the NVIDIA Arm Community!
 
-https://join.slack.com/t/nvidia-arm-hpc/shared_invite/zt-1c7oxu2cz-cozj8NWx1Nfv5zGzBnhMAA
+[![Join us on Slack](slack.png)](https://join.slack.com/t/nvidia-arm-hpc/shared_invite/zt-1cbn4fksk-P6n5zBX5Mz4RnaTj9t3axg)
+
+The easiest way to find help and talk to the experts is to join the NVIDIA Arm HPC Slack workspace.  
+
 
 ## Introduction to Arm64 and the NVIDIA HPC Developer Kit
 The NVIDIA Arm HPC Developer Kit (simply "DevKit" in this guide) is an integrated hardware and software platform for creating, evaluating, and benchmarking HPC, AI, and scientific computing applications on a heterogeneous GPU- and CPU-accelerated computing system. The kit includes an Arm CPU, dual NVIDIA A100 Tensor Core GPUs, and the NVIDIA HPC SDK suite of tools.  [See the product page for more information.](https://developer.nvidia.com/arm-hpc-devkit)
