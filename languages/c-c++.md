@@ -1,5 +1,16 @@
 # C/C++ on Arm64
 
+## Availability and Standards Compliance
+There are many C/C++ compilers available for Arm64 including:
+ * [NVIDIA HPC Compiler](https://docs.nvidia.com/hpc-sdk/compilers/hpc-compilers-user-guide/index.html)
+ * Cray/HPE Compiler
+ * GCC
+ * LLVM
+ * Arm Compiler for Linux
+
+The NVIDIA HPC Compiler is a direct decedent of the popular PGI C/C++ compiler, so it accepts the same compiler flags.  GCC and LLVM operate more-or-less the same on Arm64 as on other architectures except for the `-mcpu` flag, as described below.  The Arm Compiler for Linux is based on LLVM and includes additional optimizations for Arm Neoverse cores that make it a highly performant compiler for CPU-only applications.  However, it is missing some Fortran 2008 and OpenMP 4.5+ features that may be desirable for GPU-accelerated applications.  
+
+
 ## Enabling Arm Architecture Specific Features
 For GCC on Arm64, `-mcpu=` acts as both specifying the appropriate architecture and tuning and it's generally better to use that vs `-march` or `-mtune` if you're building for a specific CPU.  You can find additional details in this [presentation from Arm Inc. to Stony Brook University](https://www.stonybrook.edu/commcms/ookami/_pdf/Linford_OokamiUGM_2022.pdf).
 
