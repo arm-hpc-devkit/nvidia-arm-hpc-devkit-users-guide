@@ -8,4 +8,4 @@ The following are known to work well on the NVIDIA Arm HPC Developer Kit:
  * PyTorch: A GPU accelerated tensor computational framework. Functionality can be extended with common Python libraries such as NumPy and SciPy.
  * TensorFlow: An open source platform for machine learning, providing comprehensive tools and libraries in a flexible architecture allowing easy deployment across a variety of platforms and devices.  
    * Example: [GPU-accelerated training with TensorFlow](../examples/tensorflow-gpu.md) 
-   * Exampl: [on-CPU inference with TensorFlow](../examples/tensorflow-cpu.md)
+   * Example: [on-CPU inference with TensorFlow](../examples/tensorflow-cpu.md)
