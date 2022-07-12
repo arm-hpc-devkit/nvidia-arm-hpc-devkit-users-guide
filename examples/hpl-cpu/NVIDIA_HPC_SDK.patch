@@ -23,7 +23,7 @@
 -LAdir        = 
 -LAinc        = 
 -LAlib        = -lblas
-+LAdir        = /opt/nvidia/hpc_sdk/Linux_aarch64/22.5/compilers
++LAdir        = /opt/nvidia/hpc_sdk/Linux_aarch64/22.1/compilers
 +LAinc        = -I$(LAdir)/include
 +LAlib        = -L$(LAdir)/lib -lblas
  #
@@ -39,8 +39,8 @@
  # ----------------------------------------------------------------------
  #
 @@ -170,7 +170,7 @@
- CCNOOPT      = $(HPL_DEFS) 
- CCFLAGS      = $(HPL_DEFS) 
+ CCNOOPT      = $(HPL_DEFS) -O0 -Kieee
+ CCFLAGS      = $(HPL_DEFS) -O3 -fast -Minline=saxpy,sscal -Minfo
  #
 -LINKER       = mpif77
 +LINKER       = mpicc
