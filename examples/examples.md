@@ -25,5 +25,6 @@ The high memory bandwidth of the Ampere Altra CPU makes it an excellent platform
 
 ## Data Science
 
+  * [Arkouda](arkouda.md)
   * [RAPIDS](rapids.md)
   

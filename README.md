@@ -21,6 +21,7 @@ This guide includes how-to guides, sample code, recommendations, and technical b
     * [Tensorflow On-CPU Inference](examples/tensorflow-cpu.md)
     * [... see all ML examples](examples/examples.md#machine-learning)
   * [Data Science](examples/examples.md#data-science)
+    * [Arkouda](examples/arkouda.md)
     * [RAPIDS](examples/rapids.md)
     * [... see all DS examples](examples/examples.md#data-science)
   * ... and more! [See the full list of examples here](examples/examples.md)
