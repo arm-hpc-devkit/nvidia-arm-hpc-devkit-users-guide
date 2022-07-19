@@ -168,7 +168,7 @@ Please remember that this number is provided for reference only and should not b
 
 
 ## GNU Compilers with BLIS
-TBD: DETAILS
+You can use many different BLAS libraries with the GCC compilers.  OpenBLAS, BLIS, ArmPL, etc. are all great choices.  In this example, we are using the [BLIS library](https://github.com/flame/blis) for no particular reason.
 
 1. Make sure your GNU compiler version is at least 11.0, and that your MPI package has been configured to use that compiler.  Which versions of the GNU compilers and MPI are available on your system, and where they are installed, will be up to your system adminstrator.
 ```bash
