@@ -137,14 +137,9 @@ Once a profile is established, the hot paths can be rewritten to avoid the overh
 Since you're rewriting your x86 intrinsics, you might want to take this opportunity to create a more portable version.  Here are some suggestions to consider:
 
  1. Rewrite in native C/C++, Fortran, or another high-level compiled language.  Compilers are constantly improving, and technologies like Arm SVE enable the autovectorization of codes that formally wouldn't vectorize.  You may be able to avoid platform-specific intrinsics entirely and let the compiler do all the work.
-
  2. If your application is written in C++, use `std::experimental::simd` from the C++ Parallelism Technical Specification V2 via the `<experimental/simd>` header.
-
  3. Use the [SLEEF Vectorized Math Library](https://sleef.org/) as a header-based set of "portable intrinsics"
- 
  4. Instead of Time Stamp Counter (TSC) RDTSC intrinsics, use standards-compliant portable timers, e.g., `std::chrono` (C++), `clock_gettime` (C/POSIX), `omp_get_wtime` (OpenMP), `MPI_Wtime` (MPI), etc.
-
- 5. 
 
 
 ## Additional resources
