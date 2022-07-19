@@ -1,11 +1,11 @@
---- Make.NVIDIA_HPC_SDK	2022-07-19 13:13:56.121925000 -0400
-+++ Make.NVIDIA_HPC_SDK.patched	2022-07-19 13:14:16.536185000 -0400
+--- Make.ACfL	2022-07-19 13:11:08.954180000 -0400
++++ Make.ACfL.patched	2022-07-11 16:45:10.935651000 -0400
 @@ -61,13 +61,13 @@
  # - Platform identifier ------------------------------------------------
  # ----------------------------------------------------------------------
  #
 -ARCH         = UNKNOWN
-+ARCH         = NVIDIA_HPC_SDK
++ARCH         = ACfL
  #
  # ----------------------------------------------------------------------
  # - HPL Directory Structure / HPL library ------------------------------
@@ -16,16 +16,12 @@
  INCdir       = $(TOPdir)/include
  BINdir       = $(TOPdir)/bin/$(ARCH)
  LIBdir       = $(TOPdir)/lib/$(ARCH)
-@@ -92,9 +92,9 @@
- # header files,  LAlib  is defined  to be the name of  the library to be 
- # used. The variable LAdir is only used for defining LAinc and LAlib.
+@@ -94,7 +94,7 @@
  #
--LAdir        = 
--LAinc        = 
+ LAdir        = 
+ LAinc        = 
 -LAlib        = -lblas
-+LAdir        = /sw/wombat/Nvidia_HPC_SDK/Linux_aarch64/22.1/compilers
-+LAinc        = -I$(LAdir)/include
-+LAlib        = -L$(LAdir)/lib -lblas
++LAlib        = 
  #
  # ----------------------------------------------------------------------
  # - F77 / C interface --------------------------------------------------
@@ -38,17 +34,19 @@
  # 
  # ----------------------------------------------------------------------
  #
-@@ -167,10 +167,10 @@
+@@ -167,11 +167,11 @@
  # ----------------------------------------------------------------------
  #
  CC           = mpicc
 -CCNOOPT      = $(HPL_DEFS) 
 -CCFLAGS      = $(HPL_DEFS) 
-+CCNOOPT      = $(HPL_DEFS) -O0 -Kieee
-+CCFLAGS      = $(HPL_DEFS) -O3 -fast -Minline=saxpy,sscal -Minfo
++CCNOOPT      = $(HPL_DEFS) -O0
++CCFLAGS      = $(HPL_DEFS) -Ofast -mcpu=neoverse-n1 -armpl
  #
 -LINKER       = mpif77
+-LINKFLAGS    = 
 +LINKER       = mpicc
- LINKFLAGS    = 
++LINKFLAGS    = -armpl
  #
  ARCHIVER     = ar
+ ARFLAGS      = r
