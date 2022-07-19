@@ -1,5 +1,5 @@
-# Getting started with the NVIDIA Arm HPC Developer Kit
-This guide includes how-to guides, sample code, recommendations, and technical best practices to help new users get started with Arm-based systems like the NVIDIA Arm HPC Developer Kit.  While it is intended for the users and administrators of NVIDIA's Arm-based platforms, this guide is also generically useful for anyone running code on Arm CPUs.
+# Getting started with HPC on Arm64 
+This guide includes how-to guides, sample code, recommendations, and technical best practices to help new users get started with Arm-based systems like the NVIDIA Arm HPC Developer Kit.  While it is intended for the users and administrators of NVIDIA's Arm-based platforms, this guide is also generically useful for anyone running HPC applications on Arm CPUs, with or without GPUs.  The focus is mostly on the CPU since Arm-hosted GPUs are just the same as GPUs hosted by any other CPUs.
 
 
 ## Contents
