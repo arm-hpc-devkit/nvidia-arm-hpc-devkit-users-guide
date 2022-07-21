@@ -4,7 +4,7 @@ Current versions of popular Linux distributions (Ubuntu, RedHat, etc.) support A
 
 
 ## RedHat Enterprise Linux and Derivatives
-Name | Version | [LSE Support](../optimization/optimization.md#locksynchronization-intensive-workload) | Kernel page size | Download | Comment
+Name | Version | [LSE Support](../optimization/README.md#locksynchronization-intensive-workload) | Kernel page size | Download | Comment
 ------ | ------ | ----- | ----- | ----- | -----
 RHEL | 9.0 | Yes | 64KB | [ISO](https://developers.redhat.com/content-gateway/file/rhel-9.0-aarch64-dvd.iso) | 
 RHEL | 8.6 | Yes | 64KB | [ISO](https://developers.redhat.com/content-gateway/file/rhel-8.6-aarch64-dvd.iso) | 
@@ -17,7 +17,7 @@ CentOS | 8.2 or later | No | 64KB | [ISO](http://bay.uchicago.edu/centos-vault/8
 
 
 ## Ubuntu
- Name | Version | [LSE Support](../optimization/optimization.md#locksynchronization-intensive-workload) | Kernel page size | Download | Comment
+ Name | Version | [LSE Support](../optimization/README.md#locksynchronization-intensive-workload) | Kernel page size | Download | Comment
 ------ | ------ | ----- | ----- | ----- | -----
 Ubuntu | 22.04 LTS | Yes | 4KB | [ISO](https://cdimage.ubuntu.com/releases/22.04/release/ubuntu-22.04-live-server-arm64.iso) | 
 Ubuntu | 20.04 LTS | Yes | 4KB | [ISO](https://cdimage.ubuntu.com/releases/20.04/release/ubuntu-20.04.4-live-server-arm64.iso) | NVIDIA tested and qualified on DevKit
@@ -25,13 +25,13 @@ Ubuntu | 18.04 LTS | Yes (*) | 4KB | [ISO](https://cdimage.ubuntu.com/releases/1
 
 
 ## SUSE Linux Enterprise Server
- Name | Version | [LSE Support](../optimization/optimization.md#locksynchronization-intensive-workload) | Kernel page size | Download | Comment
+ Name | Version | [LSE Support](../optimization/README.md#locksynchronization-intensive-workload) | Kernel page size | Download | Comment
 ------ | ------ | ----- | ----- | ----- | -----
 SLES | 15 SP2 or later | Planned | 4KB | [SUSE Download](https://www.suse.com/download/sles/) | 
 
 
 ## Others
-Name | Version | [LSE Support](../optimization/optimization.md#locksynchronization-intensive-workload) | Kernel page size | Download | Comment
+Name | Version | [LSE Support](../optimization/README.md#locksynchronization-intensive-workload) | Kernel page size | Download | Comment
 ------ | ------ | ----- | ----- | ----- | -----
 AlmaLinux | 9.0 | Yes | 64KB | [Mirror List](https://mirrors.almalinux.org/isos/aarch64/9.0.html) | 
 AlmaLinux | 8.6 | Yes | 64KB | [Mirror List](https://mirrors.almalinux.org/isos/aarch64/8.6.html) | 

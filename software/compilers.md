@@ -1,6 +1,6 @@
 # Compilers for Arm64
 
-Many commercial and open source compilers now support Arm64.  See [the compilers page](compilers.md) for details, recommendations, and best practices.  We also recommend you check the [language-specific considerations](../languages/languages.md#language-specific-considerations).
+Many commercial and open source compilers now support Arm64.  See [the compilers page](compilers.md) for details, recommendations, and best practices.  We also recommend you check the [language-specific considerations](../languages/README.md#language-specific-considerations).
 
 ## NVIDIA HPC Compilers
 

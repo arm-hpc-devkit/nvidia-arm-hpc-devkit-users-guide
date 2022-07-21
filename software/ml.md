@@ -1,6 +1,6 @@
 # AI, ML, and DL Frameworks
 
-Many AI, ML, and DL frameworks work well on Arm64-based platforms.  In most cases, you will want to use the Arm-hosted GPU for training or inference.  You may also wish to use the CPU for inference.  See [the examples page](../examples/examples.md) for more information.
+Many AI, ML, and DL frameworks work well on Arm64-based platforms.  In most cases, you will want to use the Arm-hosted GPU for training or inference.  You may also wish to use the CPU for inference.  See [the examples page](../examples/README.md) for more information.
 
 The following are known to work well on the NVIDIA Arm HPC Developer Kit:
  * TensorRT: An SDK for high-performance deep learning inference, includes a deep learning inference optimizer and runtime that delivers low latency and high throughput for inference applications.
