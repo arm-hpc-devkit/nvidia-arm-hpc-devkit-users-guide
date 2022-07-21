@@ -70,7 +70,31 @@ test.c:37:1: missed: not vectorized: loop nest containing two or more consecutiv
 ```
 And the outer loop is still not vectorized as expected, but the inner loop is now vectorized and 3-4x faster. 
 
-As compiler capabilities improve over time, such techniques are rarely needed. Only if your application cannot update to the most recent compilers should you take this approach.  
+As compiler capabilities improve over time, such techniques are rarely needed. Only if your application cannot update to the most recent compilers should you take this approach.
+
+
+## Relaxed vector conversions
+Arm NEON differentiates between vectors of signed and unsigned types.  For example, GCC won't implicitly cast between vectors of signed and unsigned 64-bit integers:
+```c
+#include <arm_neon.h>
+...
+uint64x2_t u64x2;
+int64x2_t s64x2;
+// Error: cannot convert 'int64x2_t' to 'uint64x2_t' in assignment
+u64x2 = s64x2;
+```
+
+To perform the cast, you must use NEON's `vreinterpretq` functions:
+```c
+u64x2 = vreinterpretq_u64_s64(s64x2);
+```
+
+Unfortunately, some codes written for other SIMD ISAs rely on these kinds of implicit conversions (see the [Velox example](../examples/velox.md)).  If you see errors about "no known conversion" in a code that builds for AVX but doesn't build for NEON then we might need to relax GCC's vector converversion rules: 
+```
+/tmp/velox/third_party/xsimd/include/xsimd/types/xsimd_batch.hpp:35:11: note:   no known conversion for argument 1 from ‘xsimd::batch<long int>’ to ‘const xsimd::batch<long unsigned int>&’
+```
+To allow implicit conversions between vectors with differing numbers of elements and/or incompatible element types, use the `-flax-vector-conversions` flag.  This flag should be fine for legacy code, but it should not be used for new code.  The safest option is to use the appropriate `vreinterpretq` calls.
+
 
 ## Runtime detection of supported SIMD instructions
 
