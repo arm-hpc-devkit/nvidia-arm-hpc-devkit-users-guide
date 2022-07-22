@@ -47,7 +47,7 @@ And you can now use numpy and pandas.
 
 ## Mamba
 
-https://mamba.readthedocs.io/en/latest/#
+Mamba is a fast, robust, and cross-platform package manager that is fully compatible with conda packages and supports most of conda’s commands.  It fully supports Arm64.  See https://mamba.readthedocs.io/en/latest/# for details.
 
 
 ## A quick note on dependencies
@@ -56,8 +56,8 @@ This isn't really an Arm64 requirement since it applies to all platforms.  The i
 ```
 /data/jlinford/anaconda3/bin/gtk-query-immodules-3.0: error while loading shared libraries: libXfixes.so.3: cannot open shared object file: No such file or directory
 ```
-then search for the missing library and install the appropriate package. For example, on Rocky 9:
+then search for the missing library and install the appropriate package. For example, on Ubuntu Server 20.04:
 ```bash
-
+sudo apt-get install libxi6 libgconf-2-4 libxfixes3 libxcursor1
 ```
 It may take a few tries to get all the dependencies sorted, especially if you're working on a minimal installation of the OS.
