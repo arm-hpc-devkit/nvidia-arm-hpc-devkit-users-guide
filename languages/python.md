@@ -156,8 +156,8 @@ python3 -c "import scipy as sp; sp.__config__.show()"
 In the case of Ubuntu and Debian these commands will print `blas` and `lapack`
 which are symbolic links managed by `update-alternatives`.
 
-### Improving BLIS and OpenBLAS performance with multi-threading
 
+### Improving BLIS and OpenBLAS performance with multi-threading
 When OpenBLAS is built with `USE_OPENMP=1` it will use OpenMP to parallelize the
 computations.  The environment variable `OMP_NUM_THREADS` can be set to specify
 the maximum number of threads.  If this variable is not set, the default is to
@@ -167,6 +167,7 @@ To enable parallelism with BLIS, one needs to both configure with
 `--enable-threading=openmp` and set the environment variable `BLIS_NUM_THREADS`
 to the number of threads to use, the default is to use a single thread.
 
+
 ### Arm64 support in Conda / Anaconda
 Anaconda is a distribution of the Python and R programming languages for scientific computing, that aims to simplify package management and deployment.
 
@@ -174,49 +175,22 @@ Anaconda has announced [support for Arm64 via AWS Graviton 2 on May 14, 2021](ht
 
 Anaconda also offers a lightweight version called [Miniconda](https://docs.conda.io/en/latest/miniconda.html) which is a small, bootstrap version of Anaconda that includes only conda, Python, the packages they depend on, and a small number of other useful packages, including pip, zlib and a few others. 
 
-Here is an example on how to use it to install [numpy](https://numpy.org/) and [pandas](https://pandas.pydata.org/) for Python 3.9.
+See [the Anaconda, Miniconda, Conda, Mamba example](../examples/anaconda.md) for details.
 
-The first step is to install conda:
-```bash
-$ wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-aarch64.sh
-$ chmod a+x chmod a+x Miniconda3-py39_4.10.3-Linux-aarch64.sh
-$ ./Miniconda3-py39_4.10.3-Linux-aarch64.sh
-```
-
-Once installed, you can either use the `conda` command directly to install packages, or write an environment definition file and create the corresponding environment.
-
-Here's an example to install [numpy](https://numpy.org/) and [pandas](https://pandas.pydata.org/) (`arm64-example.yml`):
-```
-name: arm64-example
-dependencies:
-  - numpy
-  - pandas
-```
-
-The next step is to instantiate the environment from that definition:
-```
-$ conda env create -f arm64-example.yml
-```
-
-And you can now use numpy and pandas for Python 3.9.
 
 ## Other common Python packages
 
 ### Pillow
-
 Pillow 8.x or later have a binary wheel for all Arm64 platforms, included OSes with 64kB pages like Redhat/CentOS8.
-
-```
+```bash
 pip3 install --user pillow
 ```
-
 should work across all platforms we tested.
 
 
 ## Machine Learning Python packages
 
 ### PyTorch
-
 PyTorch wheels for nightly builds (cpu builds) are are available for Arm64 since PyTorch 1.8.
 ```bash
 pip install numpy
@@ -224,12 +198,10 @@ pip install --pre torch torchvision  -f https://download.pytorch.org/whl/nightly
 ```
 
 ### DGL
-
 Install PyTorch as described above, then follow the [install from source instructions](https://github.com/dmlc/dgl/blob/master/docs/source/install/index.rst#install-from-source).
 
 
 ### Sentencepiece
-
 Install PyTorch as described above.  Then:
 ```
 # git the source and build/install the libraries.

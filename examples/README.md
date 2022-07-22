@@ -23,6 +23,7 @@ The high memory bandwidth of the Ampere Altra CPU makes it an excellent platform
 
 ## Data Science
 
+  * [Anaconda, Miniconda, Conda, Mamba](anaconda.md)
   * [Arkouda](arkouda.md)
 
 ## ... and more!
