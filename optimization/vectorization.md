@@ -1,17 +1,34 @@
 # Arm SIMD Instructions: SVE and NEON
 
-The Arm architecture provides two single-instruction-multiple-data (SIMD) instruction extensions: NEON and SVE.  
+The Arm architecture provides two single-instruction-multiple-data (SIMD) instruction extensions: NEON and SVE.
 
 Arm Advanced SIMD Instructions (a.k.a. "NEON") is the most common SIMD ISA for Arm64.  It is a fixed-length SIMD ISA that supports vectors of 128 bits.  The first Arm-based supercomputer to appear on the Top500 Supercomputers list ([_Astra_](https://www.sandia.gov/labnews/2018/11/21/astra-2/)) used NEON to accelerate linear algebra, and many applications and libraries are already taking advantage of NEON.  The Ampere Altra CPU found in the NVIDIA Arm HPC Developer Kit supports NEON vectorization.
 
-More recently, Arm64 CPUs have started supporting Arm Scalable Vector Extensions (SVE).  SVE is a length-agnostic SIMD ISA that improves on NEON by supporting more datatypes (e.g. FP16), more powerful instructions (e.g. gather/scatter), and vector lengths of more than 128 bits.  SVE is currently found in the AWS Graviton 3 (2x256 bits), Fujitsu A64FX (2x512 bits), and the Alibaba Yitian 710 (2x128 bits).  All of these CPUs also support NEON.  The Ampere Altra CPU found in the NVIDIA DevKit does not support SVE, only NEON.
+More recently, Arm64 CPUs have started supporting [Arm Scalable Vector Extensions (SVE)](https://developer.arm.com/documentation/102476/latest/).  SVE is a length-agnostic SIMD ISA that supports more datatypes than NEON (e.g. FP16), offers more powerful instructions (e.g. gather/scatter), and supports vector lengths of more than 128 bits.  SVE is currently found in the AWS Graviton 3, Fujitsu A64FX, and the Alibaba Yitian 710.  SVE is not a new version of NEON, but an entirely new SIMD ISA in it's own right.  Most SVE-capable CPUs also support NEON.
 
-This guide is written for developers writing new code or libraries. It presents various ways to take advantage of SIMD instructions whether through compiler auto-vectorization or writing intrinsics.  It also explains how to build portable code that can detect, at runtime, which instructions are available in the host CPU.  This enables developers to  build one binary that supports cores with different capabilities. For example, to support one binary that would run on the NVIDIA Arm HPC Developer Kit with NEON, or the AWS Graviton 3 with SVE.
+Here's a quick summary of the SIMD capabilities of some of the currently available Arm64 CPUs:
+
+|                        | Alibaba Yitian 710 | AWS Graviton3 | Fujitsu A64FX  | AWS Graviton2 | Ampere Altra |
+| ---------------------- | ------------------ | ------------- | -------------- | ------------- | ------------ |
+| CPU Core               | Neoverse N2        | Neoverse V1   | A64FX          | Neoverse N1   | Neoverse N1  |
+| SIMD ISA               | SVE2 & NEON        | SVE & NEON    | SVE & NEON     | NEON only     | NEON only    |
+| NEON Configuration     | 2x128              | 4x128         | 2x128          | 2x128         | 2x128        |
+| SVE Configuration      | 2x128              | 2x256         | 2x512          | N/A           | N/A          |
+| SVE Version            | 2                  | 1             | 1              | N/A           | N/A          |
+| NEON FMLA FP64 TPeak   | 8                  | 16            | 8              | 8             | 8            |
+| SVE FMLA FP64 TPeak    | 8                  | 16            | 32             | N/A           | N/A          |
+
+Note that recent Arm64 CPUs provide the same peak theoretical performance for both NEON and SVE.  For example, the Graviton3 can either retire four 128-bit NEON operations or two 256-bit SVE operations.  The Yitian 710 takes this one step further and provides both NEON and SVE in the same configuration (2x128).  On paper, the peak performance of both SVE and NEON are the same for these CPUs, which means there's no intrinsic performance advantage for SVE vs. NEON, or vice versa.  (Note: there are micro-architectural details that can give one ISA a performance advantage over the other in certain conditions, but the upper limit on performance is always the same.)
+
+However, SVE ([and especially SVE2](https://developer.arm.com/documentation/102340/0001/Introducing-SVE2)) is a much more capable SIMD ISA with support for complex datatypes and advanced features that enable vectorization of complicated code.  In practice, kernels that can't be vectorized in NEON _can_ be vectorized with SVE.  So while SVE won't beat NEON in a performance drag race, it can dramatically improve the performance of the application overall by vectorizing loops that would otherwise have executed with scalar instructions.  
+
+Fortunately, auto-vectorizing compilers are usually the best choice when programming Arm SIMD ISAs.  The compiler will generally make the best decision on when to use SVE or NEON, and it will take advantage of SVE's advanced auto-vectorization features more easily than a human coding in intrinsics or assembly is likely to do.  **Generally speaking, you should not write SVE or NEON intrinsics.**  Instead, use the appropriate command line options with your auto-vectorizing compiler to realize the best performance for a given loop.  You may need to use compiler directives or make changes in the high level code to facilitate autovectorization, but this will be much easier and more maintainable than writing intrinsics.  Leave the finer details to the compiler and focus on code patterns that auto-vectorize well.
+
 
 ## Compiler-driven auto-vectorization
-Whenever possible, use the most recent version of your compiler.  GCC9 supported NEON auto-vectorization fairly well, but GCC10 has shown impressive improvement over GCC9 in most cases. GCC12 further improves auto-vectorization.
+The key to maximizing auto-vectorization is to allow the compiler to take full advantage of the available hardware features.  By default, GCC and LLVM compilers take a conservative approach and do not enable advanced features unless explicitly told to do so.  The easiest way to enable all available features for GCC or LLVM is to use the `-mcpu` compiler flag. If you're compiling on the same CPU that the code will run on, use `-mcpu=native`.  Otherwise you can use `-mcpu=<target>` where `<target>` is one of the CPU identifiers, e.g. `-mcpu=neoverse-n1`.  The NVIDIA compilers take a more agressive approach.  By default, they assume the machine you are compiling on is the one you will run on and so will enable all available hardware features detected at compile time.  And whenever possible, use the most recent version of your compiler.  For example, GCC9 supported auto-vectorization fairly well, but GCC10 has shown impressive improvement over GCC9 in most cases. GCC12 further improves auto-vectorization.
 
-Compiling with `-fopt-info-vec-missed` is good practice to check which loops were not vectorized.  For example, given a code like this:
+The second key compiler feature is the compiler vectorization report.  GCC uses the `-fopt-info` flags to report on auto-vectorization success or failure.  You can use the generated informational messages to guide code annotations or transformations that will facilitate autovectorization.  For example, compiling with `-fopt-info-vec-missed` will report on which loops were not vectorized in a code like this:
 ```c
   1 // test.c 
 ...
@@ -26,7 +43,7 @@ Compiling with `-fopt-info-vec-missed` is good practice to check which loops wer
  41 }
 ```
 
-and compiling with GCC 9:
+Compiling with GCC 9:
 ```
 $ gcc test.c -fopt-info-vec-missed -O3
 test.c:37:1: missed: couldn't vectorize loop
@@ -62,15 +79,12 @@ Line 37 is the outer loop, which is not expected to vectorize.  But, the inner l
 ```
 
 The code above is forcing the inner loop to iterate multiples of 4 (128-bit SIMD / 32-bit per float). Results:
-
 ```
 $ gcc test.c -fopt-info-vec-missed -O3
 test.c:37:1: missed: couldn't vectorize loop
 test.c:37:1: missed: not vectorized: loop nest containing two or more consecutive inner loops cannot be vectorized
 ```
 And the outer loop is still not vectorized as expected, but the inner loop is now vectorized and 3-4x faster. 
-
-As compiler capabilities improve over time, such techniques are rarely needed. Only if your application cannot update to the most recent compilers should you take this approach.
 
 
 ## Relaxed vector conversions
@@ -97,7 +111,6 @@ To allow implicit conversions between vectors with differing numbers of elements
 
 
 ## Runtime detection of supported SIMD instructions
-
 To make your binaries more portable across various Arm64 CPUs, you can use Arm64 hardware capabilities to determine the available instructions at runtime.  For example, a CPU core compliant with Armv8.4 must support dot-product, but dot-products are optional in Armv8.2 and Armv8.3.  A developer wanting to build an application or library that can detect the supported instructions in runtime, can follow this example:
 
 ```c
@@ -116,7 +129,6 @@ The full list of Arm64 hardware capabilities is defined in [glibc header file](h
 ## Porting codes with SSE/AVX intrinsics to NEON
 
 ### Detecting Arm64 systems
-
 Projects may fail to build on Arm64 with `error: unrecognized command-line
 option '-msse2'`, or `-mavx`, `-mssse3`, etc.  These compiler flags enable x86
 vector instructions.  The presence of this error means that the build system may
@@ -146,7 +158,6 @@ EOF
 ```
 
 ### Translating x86 intrinsics to NEON
-
 When programs contain code with x86 intrinsics, drop-in intrinsic translation tools like [SIMDe](https://github.com/simd-everywhere/simde) or [sse2neon](https://github.com/DLTcollab/sse2neon) can be used to quickly obtain a working program on Arm64.  This is a good starting point for rewriting the x86 intrinsics in either NEON or SVE and will quickly get a prototype up and running.  For example, to port code using AVX2 intrinsics with SIMDe:
 ```c
 #define SIMDE_ENABLE_NATIVE_ALIASES
