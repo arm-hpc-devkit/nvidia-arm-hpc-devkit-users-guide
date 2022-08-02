@@ -39,12 +39,12 @@ Before starting the transition, you will need to inventory your current software
 * Tools used to build, deploy and test your application (e.g. compilers, test suites, CI/CD pipelines, provisioning tools and scripts). Note there are language specific sections in this getting started guide with useful pointers to getting the best performance from Arm64 processors.
 * Tools and/or agents used to deploy and manage the application in production (e.g. monitoring tools or security agents)
 * This guide contains language specifics sections where you'll find additional per-language guidance:
-  * [C/C++](c-c++.md)
-  * [Go](golang.md)
-  * [Java](java.md)
-  * [.NET](dotnet.md) 
-  * [Python](python.md)
-  * [Rust](rust.md)
+  * [C/C++](languages/c-c++.md)
+  * [Go](languages/golang.md)
+  * [Java](languages/java.md)
+  * [.NET](languages/dotnet.md) 
+  * [Python](languages/python.md)
+  * [Rust](languages/rust.md)
 
 As a rule, the more current your software environment the more likely you will obtain the full performance entitlement from Arm64.
 
