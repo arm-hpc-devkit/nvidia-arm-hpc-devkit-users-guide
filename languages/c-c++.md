@@ -33,7 +33,7 @@ SUSE Linux ES15 | 7*, 9, 10            | 7
 
 
 ## Large-System Extensions (LSE)
-All server-class Arm64 processors support low-cost atomic operations which can improve system throughput for CPU-to-CPU communication, locks, and mutexes. On recent Arm64 CPUs, the improvement can be up to an order of magnitude when using LSE atomics instead of load/store exclusives.  See [Locks, Synchronization, and Atomics](atomics.md) for details.
+All server-class Arm64 processors support low-cost atomic operations which can improve system throughput for CPU-to-CPU communication, locks, and mutexes. On recent Arm64 CPUs, the improvement can be up to an order of magnitude when using LSE atomics instead of load/store exclusives.  See [Locks, Synchronization, and Atomics](../optimization/atomics.md) for details.
 
 ### Enabling LSE
 
