@@ -57,6 +57,25 @@ sed -i 's/\-w \-O3 \-c/-mcpu=native \-w \-O3 \-c/g' configure.wrf
 sed -i 's/\# \-g $(FCNOOPT).*/\-g/g' configure.wrf
 sed -i 's/$(FCBASEOPTS_NO_G)/-mcpu=native $(OMP) $(FCBASEOPTS_NO_G)/g' configure.wrf
 ```
+### \[Optional\] Compiling with the NVIDIA HPC Software Development Kit (SDK)
+If you plan to use the Compilers that come with the NVIDIA HPC Software Development Kit (SDK), just like the Arm Compiler for Linux (ACfL), the stanza is not yet part of the standard WRF package. Run WRF's configure script then choose an option 1-4 and select default for nesting. This will produce the `configure.wrf' file:
+```
+./configure
+```
+The `configure.wrf' file then needs modifying as follows.
+```
+sed -i 's/gcc/nvc/g' configure.wrf
+sed -i 's/gfortran/nvfortran/g' configure.wrf
+sed -i 's/ -ftree-vectorize//g' configure.wrf
+sed -i 's/ -fopenmp/-mp/g' configure.wrf
+sed -i 's/#-fdefault-real-8/-i4/g' configure.wrf
+sed -i 's/ -O3/ -O3 -fast -Minfo/g' configure.wrf
+sed -i 's/-funroll-loops//g' configure.wrf
+sed -i 's/-ffree-form -ffree-line-length-none/-Mfree/g' configure.wrf
+sed -i 's/-fconvert=big-endian -frecord-marker=4/-byteswapio/g' configure.wrf
+sed -i 's/\# \-g $(FCNOOPT).*/\-g/g' configure.wrf
+sed -i 's/$(FCBASEOPTS_NO_G)/\-march=native $(OMP) $(FCBASEOPTS_NO_G)/g' configure.wrf
+```
 
 ### CONUS 12km test
 Download a CONUS (Contiguous US) test deck from www2.mmm.ucar.edu. The 12km case is around 1.8GB.
