@@ -77,7 +77,7 @@ Now that you have your application stack on Aarch64, you should run your test su
 
 **Step 6 - Performance testing**
 
-With your fully functional application its time to establish a performance baseline on Arm64. In most cases, you should expect performance parity, or even gains.  This guide has sections dedicated to [Optimization](/optimizing) and a [Performance Runbook](perfrunbook/grace_perfrunbook.md) for you to follow during this stage.
+With your fully functional application its time to establish a performance baseline on Arm64. In most cases, you should expect performance parity, or even gains.  This guide has sections dedicated to [Optimization](/optimization) and a [Performance Runbook](perfrunbook/grace_perfrunbook.md) for you to follow during this stage.
 
 ### _Appendix A - locating packages for Arm64/_
 
