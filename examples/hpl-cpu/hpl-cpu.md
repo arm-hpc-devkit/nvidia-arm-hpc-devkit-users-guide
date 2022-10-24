@@ -121,7 +121,7 @@ Here's a summary of the changes assuming NVIDIA HPC SDK 22.1 is installed to the
 < LAinc        =
 < LAlib        = -lblas
 ---
-> LAdir        = /sw/wombat/Nvidia_HPC_SDK/Linux_aarch64/22.1/compilers
+> LAdir        = $(NVHPC_ROOT)/compilers
 > LAinc        = -I$(LAdir)/include
 > LAlib        = -L$(LAdir)/lib -lblas
 159c159
