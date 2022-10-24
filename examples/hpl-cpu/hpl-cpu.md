@@ -86,7 +86,7 @@ The NVIDIA HPC SDK includes compilers and BLAS libraries for CPUs as well as GPU
 ```bash
 # Optional: Add the NVIDIA HPC SDK modulefiles to your modules path
 module use /opt/nvidia/hpc_sdk/modulefiles/
-module load nvhpc/22.1
+module load nvhpc
 ```
 
 2. Confirm that the `mpicc` wrapper is invoking the NVIDIA Fortran Compiler and check the compiler version.  Note that the MPI version is shown in the MPI include file path.  In this example, we're using OpenMPI 4.0.5 as distributed by the NVIDIA HPC SDK.
