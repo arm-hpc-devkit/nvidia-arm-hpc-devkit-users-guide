@@ -100,7 +100,7 @@ NVIDIA Compilers and Tools
 Copyright (c) 2022, NVIDIA CORPORATION & AFFILIATES.  All rights reserved.
 ```
 
-3. Create a new HPL configuration file from the `Make.UNKNOWN` template.  You can use [this patch file](NVIDIA_HPC_SDK.patch) to get started but be careful to check that `LAdir` is correct.  The path to your `compilers` folder in the NVIDIA HPC SDK may be different if you are using a version other than 22.1, or have installed to a location other than `/opt/nvidia`.
+3. Create a new HPL configuration file from the `Make.UNKNOWN` template.  You can use [this patch file](https://raw.githubusercontent.com/arm-hpc-devkit/nvidia-arm-hpc-devkit-users-guide/main/examples/hpl-cpu/NVIDIA_HPC_SDK.patch) to get started.
 ```bash
 cd $HOME/benchmarks/hpl-2.3
 cp setup/Make.UNKNOWN Make.NVIDIA_HPC_SDK
@@ -108,36 +108,60 @@ patch -p0 < NVIDIA_HPC_SDK.patch
 ```
 Here's a summary of the changes assuming NVIDIA HPC SDK 22.1 is installed to the default location:
 ```diff
-64c64
-< ARCH         = UNKNOWN
----
-> ARCH         = NVIDIA_HPC_SDK
-70c70
-< TOPdir       = $(HOME)/hpl
----
-> TOPdir       = $(HOME)/benchmarks/hpl-2.3
-95,97c95,97
-< LAdir        =
-< LAinc        =
-< LAlib        = -lblas
----
-> LAdir        = $(NVHPC_ROOT)/compilers
-> LAinc        = -I$(LAdir)/include
-> LAlib        = -L$(LAdir)/lib -lblas
-159c159
-< HPL_OPTS     =
----
-> HPL_OPTS     = -DHPL_CALL_CBLAS
-170,171c170,171
-< CCNOOPT      = $(HPL_DEFS)
-< CCFLAGS      = $(HPL_DEFS)
----
-> CCNOOPT      = $(HPL_DEFS) -O0 -Kieee
-> CCFLAGS      = $(HPL_DEFS) -O3 -fast -Minline=saxpy,sscal -Minfo
-173c173
-< LINKER       = mpif77
----
-> LINKER       = mpicc
+--- Make.NVIDIA_HPC_SDK	2022-07-19 13:13:56.121925000 -0400
++++ Make.NVIDIA_HPC_SDK.patched	2022-07-19 13:14:16.536185000 -0400
+@@ -61,13 +61,13 @@
+ # - Platform identifier ------------------------------------------------
+ # ----------------------------------------------------------------------
+ #
+-ARCH         = UNKNOWN
++ARCH         = NVIDIA_HPC_SDK
+ #
+ # ----------------------------------------------------------------------
+ # - HPL Directory Structure / HPL library ------------------------------
+ # ----------------------------------------------------------------------
+ #
+-TOPdir       = $(HOME)/hpl
++TOPdir       = $(HOME)/benchmarks/hpl-2.3
+ INCdir       = $(TOPdir)/include
+ BINdir       = $(TOPdir)/bin/$(ARCH)
+ LIBdir       = $(TOPdir)/lib/$(ARCH)
+@@ -92,9 +92,9 @@
+ # header files,  LAlib  is defined  to be the name of  the library to be 
+ # used. The variable LAdir is only used for defining LAinc and LAlib.
+ #
+-LAdir        = 
+-LAinc        = 
+-LAlib        = -lblas
++LAdir        = /sw/wombat/Nvidia_HPC_SDK/Linux_aarch64/22.1/compilers
++LAinc        = -I$(LAdir)/include
++LAlib        = -L$(LAdir)/lib -lblas
+ #
+ # ----------------------------------------------------------------------
+ # - F77 / C interface --------------------------------------------------
+@@ -156,7 +156,7 @@
+ #    *) call the BLAS Fortran 77 interface,
+ #    *) not display detailed timing information.
+ #
+-HPL_OPTS     =
++HPL_OPTS     = -DHPL_CALL_CBLAS
+ # 
+ # ----------------------------------------------------------------------
+ #
+@@ -167,10 +167,10 @@
+ # ----------------------------------------------------------------------
+ #
+ CC           = mpicc
+-CCNOOPT      = $(HPL_DEFS) 
+-CCFLAGS      = $(HPL_DEFS) 
++CCNOOPT      = $(HPL_DEFS) -O0 -Kieee
++CCFLAGS      = $(HPL_DEFS) -O3 -fast -Minline=saxpy,sscal -Minfo
+ #
+-LINKER       = mpif77
++LINKER       = mpicc
+ LINKFLAGS    = 
+ #
+ ARCHIVER     = ar
 ```
 
 4. Compile
