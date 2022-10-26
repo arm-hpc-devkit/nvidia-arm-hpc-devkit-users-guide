@@ -1,5 +1,20 @@
 # Optimizing for Arm64
 
+## Detecting Arm Hardware Capabilities at Runtime
+
+There are several ways to determine the available Arm CPU resources and topology at runtime, including:
+
+ * CPU architecture and supported instructions
+ * CPU manufacturer
+ * Number of CPU sockets 
+ * CPU cores per socket
+ * Number of NUMA nodes
+ * Number of NUMA nodes per socket
+ * CPU cores per NUMA node
+
+See [Runtime CPU Detection](cpudetect.md) for more details and example code.
+
+
 ## Debugging Problems
 
 It's possible that incorrect code will work fine on an existing system, but
