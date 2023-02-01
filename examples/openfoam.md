@@ -142,13 +142,6 @@ From there on, it's all ParaView as normal, exactly like any other system.  This
 ![motorBike fro NVIDIA Arm HPC DevKit](motorBike.png)
 
 
-### HPC Motorbike
-
-```bash
-git clone https://develop.openfoam.com/committees/hpc.git
-
-```
-
 
 ## Installing from source
 
