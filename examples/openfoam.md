@@ -52,6 +52,7 @@ The HPC modification of motorbike tutorial is developed from the well known moto
    - L (34M)
    - M (17.2M)
    - S (8.6M)
+
 For OpenFOAM v2212, we'll update the system files to use the GAMG solver with GaussSeidel smoother, and to take advantage of high CPU core counts.
 
 ```bash
