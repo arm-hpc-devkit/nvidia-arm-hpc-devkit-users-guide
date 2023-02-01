@@ -5,8 +5,7 @@ The [Weather Research and Forecasting (WRF) Model](https://www.mmm.ucar.edu/weat
 Arm64 is supported by the standard WRF distribution as of WRF 4.3.3. The following is an example of how to perform the standard procedure to build and execute on Arm64.  See [http://www2.mmm.ucar.edu/wrf/users/download/get_source.html](http://www2.mmm.ucar.edu/wrf/users/download/get_source.html) for more details.
 
 ## Running the CONUS (Contiguous US) test
-Build WRF using one of the methods described below (i.e. via Spack or manually).  
-While in the WRF top-level directory (i.e. `WRFV4.4.2`), download a CONUS (Contiguous US) test deck from www2.mmm.ucar.edu:
+Build WRF using one of the methods described below (i.e. via Spack or manually) and download a CONUS (Contiguous US) test deck from www2.mmm.ucar.edu:
  - 12km case, about 1.8GB: https://www2.mmm.ucar.edu/wrf/src/conus12km.tar.gz
  - 2.5km case, about 18GB: https://www2.mmm.ucar.edu/wrf/src/conus2.5km.tar.gz
 
@@ -22,14 +21,18 @@ cd run_CONUS12km
 # Download the test case files and merge them into the run directory
 curl -L https://www2.mmm.ucar.edu/wrf/src/conus12km.tar.gz | tar xvzf - --strip-components=1
 
-# Unlimit the stack
+# Configure stack limits
 ulimit -s unlimited
+export OMP_STACKSIZE=1G
 
 # Run with 8 MPI ranks, each having 10 OpenMP threads
 OMP_NUM_THREADS=10 OMP_PLACES=cores OMP_PROC_BIND=close mpirun -np 8 -map-by socket:PE=10 ./wrf.exe 
 
 # Track progress by watching the Rank 0 output file:
 tail -f rsl.out.0000
+
+# Quickly calculate the average elapsed seconds per domain as a figure-of-merit
+cat rsl.out.* | grep 'Timing for main:' | awk '{print $9}' | jq -s add/length
 ```
 
 
