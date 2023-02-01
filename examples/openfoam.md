@@ -13,7 +13,7 @@ These examples assume OpenFOAM has been installed using one of the methods descr
 spack load openfoam+paraview
 ```
 
-### simpleFoam/motorBike
+### Quick test: `motorBike` from the OpenFOAM Tutorial
 
 ```bash
 # Copy the tutorial files to a working directory
@@ -43,6 +43,86 @@ sed -i s/decomposeParDict.6/decomposeParDict.80/ Allrun
 ./Allrun
 ```
 
+### Benchmark: HPC `motorBike` 
+
+The HPC modification of motorbike tutorial is developed from the well known motorbike tutorial:
+ - The mesh generated from blockMesh is 3 times finer, along each axis, with respect to the tutorial one.  
+ - The base mesh (size S) is about 8.6*10^6 cells (the tutorial one is 3.2*10^5)
+ - Comes in three sizes according to the number of cells: 
+   - L (34M)
+   - M (17.2M)
+   - S (8.6M)
+For OpenFOAM v2212, we'll update the system files to use the GAMG solver with GaussSeidel smoother, and to take advantage of high CPU core counts.
+
+```bash
+# Download input files
+git clone https://develop.openfoam.com/committees/hpc.git
+
+# Pick a test case size, e.g. "Small"
+cd hpc/HPC_motorbike/Small/v1912
+```
+
+Update `system/decomposeParDict` to set the number of parallel subdomains.  For example, make these changes to use 64 CPU cores:
+```diff
+--- a/HPC_motorbike/Small/v1912/system/decomposeParDict
++++ b/HPC_motorbike/Small/v1912/system/decomposeParDict
+@@ -15,7 +15,7 @@ FoamFile
+
+ // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+-numberOfSubdomains 16;
++numberOfSubdomains 64;
+
+ //method          hierarchical;
+ method          scotch;
+@@ -28,7 +28,7 @@ simpleCoeffs
+
+ hierarchicalCoeffs
+ {
+-    n               (4 4 1);
++    n               (4 4 4);
+     delta           0.001;
+     order           xyz;
+ }
+```
+
+Also update `system/fvSolution` to use the GAMG solver with GaussSeidel smoother:
+```diff
+--- a/HPC_motorbike/Small/v1912/system/fvSolution
++++ b/HPC_motorbike/Small/v1912/system/fvSolution
+@@ -18,8 +18,8 @@ solvers
+ {
+     p
+     {
+-        solver          PCG;
+-        preconditioner  DIC;
++        solver          GAMG;
++        smoother        GaussSeidel;
+         tolerance       1e-7;
+         relTol          0.01;
+     }
+```
+
+Optionally, reduce `endTime` in `system/controlDict` for a quicker run:
+```diff
+--- a/HPC_motorbike/Small/v1912/system/controlDict
++++ b/HPC_motorbike/Small/v1912/system/controlDict
+@@ -22,7 +22,7 @@ startTime       0;
+
+ stopAt          endTime;
+
+-endTime         500;
++endTime         10;
+
+ deltaT          1;
+```
+
+Build the mesh and run:
+```bash
+./AllmeshS
+./Allrun
+```
+
 ### Visualize with ParaView
 
 You can use ParaView's client/server capabilities to visualize remote datasets.  This is usually a good approach if you're working on the NVIDIA Arm HPC DevKit.
@@ -59,6 +139,14 @@ pvserver
 From there on, it's all ParaView as normal, exactly like any other system.  This rendering was done by running ParaView on an Arm-based Apple M1 MacBook Pro connecting to a ParaView server running on an NVIDIA Arm HPC DevKit.  Have fun!
 
 ![motorBike fro NVIDIA Arm HPC DevKit](motorBike.png)
+
+
+### HPC Motorbike
+
+```bash
+git clone https://develop.openfoam.com/committees/hpc.git
+
+```
 
 
 ## Installing from source
@@ -210,3 +298,39 @@ jlinford@brewster:~$ spack install -j80 openfoam+paraview %gcc@12.1.0
 [+] /data/jlinford/spack/opt/spack/linux-ubuntu20.04-graviton2/gcc-12.1.0/openfoam-2206-r3ougjvuclnazmb3cgsiqrixsf2uej3b
 ```
 
+## Building from source without Spack and minimal dependendencies
+
+If you'd like to minimize OpenFOAM compilation time you can build directly from source without Spack and only enable a minimal feature set.
+
+Requirements:
+ * GMP development files, e.g. `dnf install gmp-devel` or `apt install libgmp-dev`
+ * MPFR development files, e.g. `dnf install mpfr-devel` or `apt install libmpfr-dev`
+ * CMake 3.10 or higher.  Latest version recommended.
+ * GCC 11.2 or higher.  Latest version recommended.
+ * OpenMPI 4.1.4 built with GCC.
+
+```bash
+# Note: The OpenFOAM build system needs $BUILD_DIR to be set
+export BUILD_DIR=$PWD/OpenFOAM
+mkdir -p $BUILD_DIR
+cd $BUILD_DIR
+
+# Download source
+wget https://sourceforge.net/projects/openfoam/files/v2212/OpenFOAM-v2212.tgz
+wget https://sourceforge.net/projects/openfoam/files/v2212/ThirdParty-v2212.tgz
+
+# Unpack source
+tar xvzf OpenFOAM-v2212.tgz
+tar xvzf ThirdParty-v2212.tgz
+cd OpenFOAM-v2212
+
+# Update compiler flags to tune for local CPU arch
+# This enables SVE2 auto-vectorization and LSE atomics, among other things
+sed -i -e 's/-O3/-mcpu=native -O3/' wmake/rules/linuxARM64Gcc/*
+
+# Initialize build environment
+source etc/bashrc
+
+# Compile WRF and all third party packages
+time ./Allwmake -j -s -q -l
+```
