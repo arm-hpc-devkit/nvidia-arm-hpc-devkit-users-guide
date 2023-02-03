@@ -299,6 +299,7 @@ If you'd like to minimize OpenFOAM compilation time you can build directly from 
 Requirements:
  * GMP development files, e.g. `dnf install gmp-devel` or `apt install libgmp-dev`
  * MPFR development files, e.g. `dnf install mpfr-devel` or `apt install libmpfr-dev`
+ * Flex development files, e.g. `dnf install flex-devel` or `apt install libfl-dev`
  * CMake 3.10 or higher.  Latest version recommended.
  * GCC 11.2 or higher.  Latest version recommended.
  * OpenMPI 4.1.4 built with GCC.
