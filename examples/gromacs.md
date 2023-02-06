@@ -23,7 +23,11 @@ We'll be using the GROMACS container available at https://catalog.ngc.nvidia.com
 # Navigate to the ADH benchmarks directory
 cd gromacs/ADH
 # Run the GROMACS preprocessor
-docker run -ti --runtime nvidia -v /dev/infiniband:/dev/inifiniband -v $(pwd)/adh_cubic:/benchmark --workdir /benchmark nvcr.io/hpc/gromacs:2022.1 sh -c "gmx grompp -f pme_verlet.mdp"
+docker run -ti --runtime nvidia \
+        -v /dev/infiniband:/dev/inifiniband \
+        -v $(pwd)/adh_cubic:/benchmark \
+        --workdir /benchmark \
+        nvcr.io/hpc/gromacs:2022.1 sh -c "gmx grompp -f pme_verlet.mdp"
 ```
 
 ### Running on GPU and CPU
