@@ -64,7 +64,21 @@ This [technical blog post from NVIDIA](https://developer.nvidia.com/blog/creatin
 
  The combination of these settings triggers all optimizations, including dependencies such as GPU-acceleration of buffer operations.  When using these options, it's best to keep a low number of MPI ranks and increase the number of OpenMP threads.  The suggested layout for these options with two GPUs and 80 CPU cores is four MPI ranks with 20 OpenMP threads each.  Use the `--env` flag to set the environment variables in the container:
 ```bash
-docker run -ti --runtime nvidia -v /dev/infiniband:/dev/inifiniband -v $(pwd)/adh_cubic:/benchmark --workdir /benchmark --env GMX_GPU_DD_COMMS=true --env GMX_GPU_PME_PP_COMMS=true --env GMX_FORCE_UPDATE_DEFAULT_GPU=true nvcr.io/hpc/gromacs:2022.1 sh -c "gmx mdrun -v -nsteps 100000 -resetstep 90000 -noconfout -ntmpi 4 -ntomp 20 -nb gpu -bonded gpu -pme gpu -npme 1 -pin on -nstlist 400 -s topol.tpr"
+docker run -ti --runtime nvidia \
+        -v /dev/infiniband:/dev/inifiniband \
+        -v $(pwd)/adh_cubic:/benchmark \
+        --workdir /benchmark \
+        --env GMX_GPU_DD_COMMS=true \
+        --env GMX_GPU_PME_PP_COMMS=true \
+        --env GMX_FORCE_UPDATE_DEFAULT_GPU=true \
+        nvcr.io/hpc/gromacs:2022.1 \
+        sh -c "gmx mdrun -v -noconfout \
+                -nsteps 100000 -resetstep 90000 \
+                -ntmpi 4 -ntomp 20 -npme 1 \
+                -nb gpu -bonded gpu -pme gpu \
+                -pin on \
+                -nstlist 400 \
+                -s topol.tpr"
 ```
 
 With these additional environment variables, you should see about 320 ns/day:
