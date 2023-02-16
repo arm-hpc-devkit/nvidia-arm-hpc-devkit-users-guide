@@ -134,7 +134,7 @@ docker run --gpus all -it --rm \
         --ipc=host \
         --ulimit memlock=-1 \
         --ulimit stack=67108864 \
-        nvcr.io/nvidia/tensorflow:22.06-tf2-py3
+        nvcr.io/nvidia/tensorflow:23.01-tf1-py3
 
 # Go to the example directory
 cd /workspace/nvidia-examples/big_lstm
@@ -152,7 +152,7 @@ python single_lm_train.py \
 
 # Evaulation 
 python single_lm_train.py \
-        --mode=eval_full
+        --mode=eval_full \
         --logdir=/logs \
         --num_gpus=2 \
         --datadir=/data/1-billion-word-language-modeling-benchmark-r13output \
